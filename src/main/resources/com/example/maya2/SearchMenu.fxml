@@ -17,8 +17,8 @@
             <TableColumn fx:id="TableStart" prefWidth="56.0" text="Start" />
             <TableColumn fx:id="TableEnd" prefWidth="58.39996337890625" text="End" />
             <TableColumn fx:id="TableLecturer" prefWidth="192.0" text="Lecturer" />
-            <TableColumn fx:id="TableTarget" prefWidth="50.4000244140625" text="Target" />
-            <TableColumn fx:id="TableActual" prefWidth="52.800048828125" text="Actual" />
+            <TableColumn fx:id="TableTarget" minWidth="0.0" prefWidth="51.1998291015625" text="Target" />
+            <TableColumn fx:id="TableActual" prefWidth="45.60001220703123" text="Actual" />
         </columns>
       </TableView>
       <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" text="Back" />

@@ -62,7 +62,6 @@ public class SearchMenuController implements Initializable {
                     row.add(rs.getString(i));
                 }
                 data.add(row);
-                System.out.println("Row [1] added " + row );
             }
         } catch(SQLException e){
             e.printStackTrace();

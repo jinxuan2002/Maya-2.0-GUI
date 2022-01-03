@@ -17,8 +17,6 @@ public class MainApplication extends Application {
         this.stage = stage;
         GoToLogin();
         stage.show();
-        System.out.println(stage.getWidth());
-        System.out.println(stage.getHeight());
     }
 
     public void GoToLogin() throws Exception {
@@ -55,7 +53,7 @@ public class MainApplication extends Application {
         SearchMenuController searchMenuController = (SearchMenuController) loadScene("SearchMenu.fxml");
         searchMenuController.setIDSession(ID, session);
         searchMenuController.setApp(this);
-        stage.setWidth(1020);
+        stage.setWidth(1000);
         stage.setHeight(700);
     }
 
