@@ -11,6 +11,7 @@ module com.example.maya2 {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires mysql.connector.java;
 
     opens com.example.maya2 to javafx.fxml;
     exports com.example.maya2;
