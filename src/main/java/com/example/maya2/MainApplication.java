@@ -27,11 +27,18 @@ public class MainApplication extends Application {
         registerMenuController.setApp(this);
     }
 
-    public void GoToMaya(String ID) throws Exception {
-        MayaMenuController mayaMenuController = (MayaMenuController) loadScene("MayaMenu.fxml");
-        mayaMenuController.setID(ID);
-        mayaMenuController.setWelcomeText();
-        mayaMenuController.setApp(this);
+    public void GoToMaya(String ID, String session) throws Exception {
+        if(session.equals("Student")){
+            MayaStudentMenuController mayaMenuController = (MayaStudentMenuController) loadScene("MayaStudentMenu.fxml");
+            mayaMenuController.setID(ID);
+            mayaMenuController.setWelcomeText();
+            mayaMenuController.setApp(this);
+        } else if(session.equals("Staff")){
+            MayaStaffMenuController mayaMenuController = (MayaStaffMenuController) loadScene("MayaStaffMenu.fxml");
+            mayaMenuController.setID(ID);
+            mayaMenuController.setWelcomeText();
+            mayaMenuController.setApp(this);
+        }
     }
 
     private Initializable loadScene(String fxml) throws Exception {

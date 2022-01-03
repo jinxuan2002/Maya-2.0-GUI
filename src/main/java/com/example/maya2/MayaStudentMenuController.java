@@ -6,10 +6,9 @@ import javafx.scene.text.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MayaMenuController implements Initializable {
+public class MayaStudentMenuController implements Initializable {
     private MainApplication main;
-    @FXML
-    private Text WelcomeText;
+    @FXML private Text WelcomeText;
     private String ID;
 
     public void setApp(MainApplication main){

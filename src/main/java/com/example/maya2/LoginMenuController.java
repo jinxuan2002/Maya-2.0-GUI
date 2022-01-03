@@ -34,10 +34,10 @@ public class LoginMenuController implements Initializable {
             //if rs.isBeforeFirst is true, the results is not empty
             if(student.isBeforeFirst()){
                 student.next();
-                main.GoToMaya(student.getString(1));
+                main.GoToMaya(student.getString(1), "Student");
             } else if(staff.isBeforeFirst()){
                 staff.next();
-                main.GoToMaya(staff.getString(1));
+                main.GoToMaya(staff.getString(1),"Staff");
             } else{
                 LoginErrorMsg.setText("Wrong ID or Password!");
             }
