@@ -2,17 +2,14 @@ package com.example.maya2;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
-import javafx.scene.text.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MayaStudentMenuController implements Initializable {
-    protected MainApplication main;
-    @FXML protected Text WelcomeText;
-    protected String ID;
-    protected String session;
-
+public class SearchMenuController implements Initializable {
+    private MainApplication main;
+    private String ID;
+    private String session;
     public void setApp(MainApplication main){
         this.main = main;
     }
@@ -22,20 +19,13 @@ public class MayaStudentMenuController implements Initializable {
         this.session = session;
     }
 
-    public void setWelcomeText(){
-        WelcomeText.setText("Welcome to Maya, " + ID);
-    }
-
-    public void GoToSearch(ActionEvent actionEvent) throws Exception {
-        main.GoToSearch(ID, session);
-    }
-
     @FXML
     public void Back(ActionEvent actionEvent) throws Exception {
-        main.GoToLogin();
+        main.GoToMaya(ID, session);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
