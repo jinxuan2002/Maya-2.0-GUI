@@ -63,4 +63,18 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
+
+    public ResultSet SearchQuery(String search){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("select * from maya.fsktm where `Module` Like ?");
+            statement.setString(1,"%" + search +"%");
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
