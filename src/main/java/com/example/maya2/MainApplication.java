@@ -27,8 +27,10 @@ public class MainApplication extends Application {
         registerMenuController.setApp(this);
     }
 
-    public void GoToMaya() throws Exception {
+    public void GoToMaya(String ID) throws Exception {
         MayaMenuController mayaMenuController = (MayaMenuController) loadScene("MayaMenu.fxml");
+        mayaMenuController.setID(ID);
+        mayaMenuController.setWelcomeText();
         mayaMenuController.setApp(this);
     }
 

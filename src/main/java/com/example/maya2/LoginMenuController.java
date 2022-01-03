@@ -28,20 +28,18 @@ public class LoginMenuController implements Initializable {
     @FXML
     public void Login(ActionEvent event) throws Exception {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.student where studentid = ? AND password = ?");
-            System.out.println(LoginID.getText());
-            System.out.println(LoginPassword.getText());
-            statement.setString(1, LoginID.getText());
-            statement.setString(2, LoginPassword.getText());
-            ResultSet rs = statement.executeQuery();
+            DBConnector dbConnector = new DBConnector();
+            ResultSet student = dbConnector.StudentLoginQuery(LoginID.getText(), LoginPassword.getText());
+            ResultSet staff = dbConnector.StaffLoginQuery(LoginID.getText(), LoginPassword.getText());
             //if rs.isBeforeFirst is true, the results is not empty
-            if(!rs.isBeforeFirst()){
-                LoginErrorMsg.setText("Wrong ID or Password");
-            } else {
-                rs.next();
-                main.GoToMaya();
+            if(student.isBeforeFirst()){
+                student.next();
+                main.GoToMaya(student.getString(1));
+            } else if(staff.isBeforeFirst()){
+                staff.next();
+                main.GoToMaya(staff.getString(1));
+            } else{
+                LoginErrorMsg.setText("Wrong ID or Password!");
             }
         }catch(ClassNotFoundException | SQLException ex){
             ex.printStackTrace();
