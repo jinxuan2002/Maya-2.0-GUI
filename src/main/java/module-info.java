@@ -3,6 +3,8 @@ module com.example.maya2 {
     requires javafx.fxml;
     requires javafx.web;
 
+    requires java.sql;
+
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires validatorfx;
