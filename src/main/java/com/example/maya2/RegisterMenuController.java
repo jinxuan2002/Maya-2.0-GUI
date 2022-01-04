@@ -15,8 +15,8 @@ public class RegisterMenuController implements Initializable {
     @FXML private TextField realName;
     @FXML private TextField email;
     @FXML private TextField ID;
-    @FXML private TextField password;
-    @FXML private TextField cpassword;
+    @FXML private PasswordField password;
+    @FXML private PasswordField cpassword;
     @FXML private ChoiceBox<String> programme;
     @FXML private ChoiceBox<Integer> muet;
     @FXML private RadioButton Student;

@@ -19,20 +19,20 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SearchMenuController implements Initializable {
-    private MainApplication main;
-    private String ID;
+    protected MainApplication main;
+    protected String ID;
     private String session;
     @FXML private TextField SearchField;
-    @FXML private TableView<ObservableList<String>> SearchTable;
-    @FXML private TableColumn TableModule;
-    @FXML private TableColumn TableOcc;
-    @FXML private TableColumn TableMode;
-    @FXML private TableColumn TableDay;
-    @FXML private TableColumn TableStart;
-    @FXML private TableColumn TableEnd;
-    @FXML private TableColumn TableLecturer;
-    @FXML private TableColumn TableTarget;
-    @FXML private TableColumn TableActual;
+    @FXML protected TableView<ObservableList<String>> SearchTable;
+    @FXML protected TableColumn TableModule;
+    @FXML protected TableColumn TableOcc;
+    @FXML protected TableColumn TableMode;
+    @FXML protected TableColumn TableDay;
+    @FXML protected TableColumn TableStart;
+    @FXML protected TableColumn TableEnd;
+    @FXML protected TableColumn TableLecturer;
+    @FXML protected TableColumn TableTarget;
+    @FXML protected TableColumn TableActual;
 
 
 

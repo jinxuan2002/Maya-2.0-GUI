@@ -1,5 +1,7 @@
 package com.example.maya2;
 
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 
 public class DBConnector {
@@ -76,5 +78,28 @@ public class DBConnector {
             e.printStackTrace();
         }
         return rs;
+    }
+
+    public void EditQuery(ObservableList<String> list, String day, String start, String end, String Lecturer, int target){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("UPDATE maya.fsktm SET Day = ?, Start = ?, End = ?, Tutorial = ? WHERE Module = ? AND Occurrence = ? AND Mode = ?");
+            PreparedStatement changeTargetStatement = connection.prepareStatement("UPDATE maya.fsktm SET Target = ? WHERE Module = ? AND Occurrence = ?");
+            statement.setString(1, day);
+            statement.setString(2, start);
+            statement.setString(3, end);
+            statement.setString(4, Lecturer.toUpperCase());
+            statement.setString(5, list.get(0));
+            statement.setString(6, list.get(1));
+            statement.setString(7, list.get(2));
+            changeTargetStatement.setInt(1, target);
+            changeTargetStatement.setString(2, list.get(0));
+            changeTargetStatement.setString(3, list.get(1));
+            statement.executeUpdate();
+            changeTargetStatement.executeUpdate();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
     }
 }

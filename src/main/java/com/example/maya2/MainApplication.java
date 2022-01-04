@@ -1,6 +1,7 @@
 package com.example.maya2;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.stage.Stage;
@@ -57,10 +58,29 @@ public class MainApplication extends Application {
         stage.setHeight(700);
     }
 
+    public void GoToModify(String ID, String session) throws Exception {
+        ModifyMenuController modifyMenuController = (ModifyMenuController) loadScene("ModifyMenu.fxml");
+        modifyMenuController.setIDSession(ID, session);
+        modifyMenuController.setApp(this);
+        stage.setWidth(1000);
+        stage.setHeight(700);
+    }
+
+    public void GoToCreate(String ID){
+
+    }
+
+    public void GoToEdit(ObservableList<String> list, String ID) throws Exception {
+        EditMenuController editMenuController = (EditMenuController) loadScene("EditMenu.fxml");
+        editMenuController.setIDList(ID, list);
+        editMenuController.initializeTextAndBox();
+        editMenuController.setApp(this);
+    }
+
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));
-        return (Initializable) loader.getController();
+        return loader.getController();
     }
 
     public static void main(String[] args) {

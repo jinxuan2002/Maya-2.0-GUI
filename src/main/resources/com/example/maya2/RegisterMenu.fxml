@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,8 +16,6 @@
       <RadioButton fx:id="Staff" layoutX="317.0" layoutY="53.0" mnemonicParsing="false" onAction="#SelectStaff" text="Staff" />
       <TextField fx:id="email" layoutX="236.0" layoutY="121.0" />
       <TextField fx:id="ID" layoutX="236.0" layoutY="155.0" />
-      <TextField fx:id="password" layoutX="235.0" layoutY="189.0" />
-      <TextField fx:id="cpassword" layoutX="236.0" layoutY="221.0" />
       <Text layoutX="162.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Real Name:" textAlignment="RIGHT" wrappingWidth="63.200000000000045" />
       <Text layoutX="162.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" textAlignment="RIGHT" wrappingWidth="63.200000000000045" />
       <Text layoutX="162.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" textAlignment="RIGHT" wrappingWidth="63.200000000000045" />
@@ -28,5 +27,7 @@
       <ChoiceBox fx:id="programme" layoutX="235.0" layoutY="256.0" prefHeight="26.0" prefWidth="46.0" />
       <ChoiceBox fx:id="muet" layoutX="234.0" layoutY="291.0" prefHeight="26.0" prefWidth="46.0" />
       <Text fx:id="MailPrefix" layoutX="393.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="\@siswa.um.edu.my" wrappingWidth="113.60002441406255" />
+      <PasswordField fx:id="password" layoutX="237.0" layoutY="189.0" />
+      <PasswordField fx:id="cpassword" layoutX="237.0" layoutY="221.0" />
    </children>
 </AnchorPane>

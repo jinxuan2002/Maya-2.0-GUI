@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 
 public class LoginMenuController implements Initializable {
     @FXML private TextField LoginID;
-    @FXML private TextField LoginPassword;
+    @FXML private PasswordField LoginPassword;
     @FXML private Button LoginButton;
     @FXML private Button RegisterButton;
     @FXML private Label LoginErrorMsg;
