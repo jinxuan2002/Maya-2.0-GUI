@@ -71,8 +71,10 @@ public class DBConnector {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("select * from maya.fsktm where `Module` Like ?");
+            PreparedStatement statement = connection.prepareStatement("select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.fsktm where `Module` Like ? UNION select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.fll where `Module` Like ? UNION select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.uni where `Module` Like ?");
             statement.setString(1,"%" + search +"%");
+            statement.setString(2,"%" + search +"%");
+            statement.setString(3,"%" + search +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -98,6 +100,33 @@ public class DBConnector {
             changeTargetStatement.setString(3, list.get(1));
             statement.executeUpdate();
             changeTargetStatement.executeUpdate();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void InsertQuery(String faculty, String module, String occ, String mode, String day, String start, String end, String lecturer, int target){
+        faculty = switch(faculty){
+            case "Faculty of Computer Science and Information Technology" -> "fsktm";
+            case "Faculty of Language and Linguistics" -> "fll";
+            case "University" -> "uni";
+            default -> throw new IllegalStateException("Unexpected value: " + faculty);
+        };
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO maya." + faculty + " (Module, Occurrence, Mode, Day, Start, End, Tutorial, Target, Actual) VALUES (?,?,?,?,?,?,?,?,?)");
+            statement.setString(1, module.toUpperCase());
+            statement.setString(2, occ);
+            statement.setString(3, mode);
+            statement.setString(4, day);
+            statement.setString(5, start);
+            statement.setString(6, end);
+            statement.setString(7, lecturer.toUpperCase());
+            statement.setInt(8, target);
+            statement.setInt(9, 0);
+            statement.executeUpdate();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }

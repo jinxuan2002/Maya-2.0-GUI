@@ -58,7 +58,7 @@ public class SearchMenuController implements Initializable {
         try{
             while(rs.next()){
                 ObservableList<String> row = FXCollections.observableArrayList();
-                for(int i = 2 ; i <= rs.getMetaData().getColumnCount() - 1; i++){
+                for(int i = 1 ; i <= rs.getMetaData().getColumnCount(); i++){
                     row.add(rs.getString(i));
                 }
                 data.add(row);

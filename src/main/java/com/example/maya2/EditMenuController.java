@@ -37,8 +37,6 @@ public class EditMenuController implements Initializable {
     }
 
     public void initializeTextAndBox(){
-        ObservableList<String> Day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday");
-        DayBox.setItems(Day);
         ModuleText.setText(list.get(0));
         OccText.setText(list.get(1));
         ModeText.setText(list.get(2));
@@ -55,11 +53,16 @@ public class EditMenuController implements Initializable {
     @FXML
     public void Update(ActionEvent actionEvent){
         DBConnector dbConnector = new DBConnector();
-        int start = Integer.parseInt(StartText.getText());
-        int end = Integer.parseInt(EndText.getText());
-        if(start < end){
-            dbConnector.EditQuery(list, DayBox.getValue(), StartText.getText(),
-                    EndText.getText(), LecturerText.getText(), Integer.parseInt(TargetText.getText()));
+        String start = StartText.getText();
+        String end = EndText.getText();
+        int target = Integer.parseInt(TargetText.getText());
+        if(start.isEmpty() || end.isEmpty()){
+            start = "N/A";
+            end = "N/A";
+        }
+        if(Integer.parseInt(start) < Integer.parseInt(end) && target > 0 && Integer.parseInt(start) <= 2400 && Integer.parseInt(end) <= 2400){
+            dbConnector.EditQuery(list, DayBox.getValue(), start,
+                    end, LecturerText.getText(), target);
         }
     }
 
@@ -70,6 +73,9 @@ public class EditMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday");
+        DayBox.setItems(day);
+
         TargetText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,

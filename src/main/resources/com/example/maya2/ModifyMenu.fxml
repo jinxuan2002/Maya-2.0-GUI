@@ -24,7 +24,7 @@
       <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" text="Back" />
       <Button layoutX="418.0" layoutY="22.0" mnemonicParsing="false" onAction="#Search" text="Search" />
       <TextField fx:id="SearchField" layoutX="119.0" layoutY="22.0" prefHeight="26.0" prefWidth="282.0" />
-      <Button layoutX="780.0" layoutY="23.0" mnemonicParsing="false" text="Create" />
+      <Button layoutX="780.0" layoutY="23.0" mnemonicParsing="false" onAction="#GoToCreate" text="Create" />
       <Button layoutX="901.0" layoutY="23.0" mnemonicParsing="false" text="Delete" />
       <Button layoutX="840.0" layoutY="22.0" mnemonicParsing="false" onAction="#GoToEdit" prefHeight="26.0" prefWidth="50.0" text="Edit" />
    </children>

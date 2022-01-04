@@ -66,8 +66,10 @@ public class MainApplication extends Application {
         stage.setHeight(700);
     }
 
-    public void GoToCreate(String ID){
-
+    public void GoToCreate(String ID) throws Exception {
+        CreateMenuController createMenuController = (CreateMenuController) loadScene("CreateMenu.fxml");
+        createMenuController.setID(ID);
+        createMenuController.setApp(this);
     }
 
     public void GoToEdit(ObservableList<String> list, String ID) throws Exception {
