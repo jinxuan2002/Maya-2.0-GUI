@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.MayaStaffMenuController">
    <children>
-      <Text fx:id="WelcomeText" layoutX="247.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Maya" wrappingWidth="105.33673095703125" />
+      <Text fx:id="WelcomeText" layoutX="180.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Maya" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="239.24609375">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="MayaStudentBack" layoutX="51.0" layoutY="37.0" mnemonicParsing="false" onAction="#Back" prefWidth="41.0" text="Back" />
+      <Button layoutX="97.0" layoutY="108.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="Register Module" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="247.0" layoutY="108.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="View Module" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="407.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToSearch" prefHeight="58.0" prefWidth="96.0" text="Search Module" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="97.0" layoutY="208.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="View Timetable" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>
