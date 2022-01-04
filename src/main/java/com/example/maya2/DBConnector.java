@@ -45,7 +45,7 @@ public class DBConnector {
             statement.setString(3, password);
             statement.setString(4, programme);
             statement.setInt(5, muet);
-            statement.setString(6, fullName);
+            statement.setString(6, fullName.toUpperCase());
             statement.executeUpdate();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -60,7 +60,7 @@ public class DBConnector {
             statement.setString(1, username);
             statement.setString(2, mail);
             statement.setString(3, password);
-            statement.setString(4, fullName);
+            statement.setString(4, fullName.toUpperCase());
             statement.executeUpdate();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
