@@ -35,16 +35,17 @@ public class DBConnector {
         return null;
     }
 
-    public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet){
+    public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.student VALUES(?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.student VALUES(?,?,?,?,?,?)");
             statement.setString(1, ID);
             statement.setString(2, email);
             statement.setString(3, password);
             statement.setString(4, programme);
             statement.setInt(5, muet);
+            statement.setString(6, fullName);
             statement.executeUpdate();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();

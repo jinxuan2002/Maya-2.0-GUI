@@ -37,8 +37,6 @@ public class RegisterMenuController implements Initializable {
         Student.setSelected(true);
         Staff.setSelected(false);
         MailPrefix.setText("@siswa.um.edu.my");
-        realName.clear();
-        realName.setDisable(true);
         programme.setDisable(false);
         muet.setDisable(false);
     }
@@ -48,7 +46,6 @@ public class RegisterMenuController implements Initializable {
         Student.setSelected(false);
         Staff.setSelected(true);
         MailPrefix.setText("@um.edu.my");
-        realName.setDisable(false);
         programme.setDisable(true);
         muet.setDisable(true);
     }
@@ -56,19 +53,22 @@ public class RegisterMenuController implements Initializable {
     @FXML
     public void Register(ActionEvent actionEvent) throws Exception {
         boolean validity = true;
+        if(realName.getText().isEmpty()){
+           validity = false;
+        }
         if((ID.getText().charAt(0) != 'U' || ID.getText().length() != 8) && Student.isSelected()){
             validity = false;
         }
-
         if(!password.getText().equals(cpassword.getText()) || password.getText().length() == 0){
             validity = false;
         }
         if(email.getText().contains("@") || email.getText().contains(".")){
             validity = false;
         }
+
         if(validity && Student.isSelected()){
             DBConnector dbConnector = new DBConnector();
-            dbConnector.StudentRegisterUpdate(ID.getText(), password.getText(), email.getText().toLowerCase() + "@siswa.um.edu.my", programme.getValue(), muet.getValue());
+            dbConnector.StudentRegisterUpdate(ID.getText(), password.getText(), email.getText().toLowerCase() + "@siswa.um.edu.my", programme.getValue(), muet.getValue(),realName.getText());
             main.GoToLogin();
         }
         if(validity && Staff.isSelected()){
@@ -87,6 +87,5 @@ public class RegisterMenuController implements Initializable {
         programme.setValue("SE");
         muet.setValue(1);
         Student.setSelected(true);
-        realName.setDisable(true);
     }
 }
