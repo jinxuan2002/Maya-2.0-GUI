@@ -61,7 +61,7 @@ public class CreateMenuController implements Initializable {
            try{
                if(rs.isBeforeFirst()){
                    while(rs.next()){
-                       if(rs.getString("Occurrence").equals(occ) || rs.getString("Mode").equals(mode)){
+                       if(rs.getString("Occurrence").equals(occ) && rs.getString("Mode").equals(mode)){
                            same = true;
                            break;
                        }
@@ -87,7 +87,7 @@ public class CreateMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday"
-                , "Friday", "Saturday", "Sunday");
+                , "Friday", "Saturday", "Sunday", "N/A");
         ObservableList<String> faculty = FXCollections.observableArrayList("Faculty of Computer Science and Information Technology"
                 , "Faculty of Language and Linguistics", "University");
         ObservableList<String> mode = FXCollections.observableArrayList("TUTORIAL", "ONLINE");

@@ -131,4 +131,19 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
+
+    public void DeleteQuery(String module, String occ, String mode){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String[] tables = {"fsktm", "fll", "uni"};
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM maya.fsktm WHERE Module = ? AND Occurrence = ? AND Mode = ?");
+            statement.setString(1, module);
+            statement.setString(2, occ);
+            statement.setString(3, mode);
+            statement.executeUpdate();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 }

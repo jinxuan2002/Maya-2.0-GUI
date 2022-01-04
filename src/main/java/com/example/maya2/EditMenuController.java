@@ -73,7 +73,7 @@ public class EditMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday");
+        ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday", "N/A");
         DayBox.setItems(day);
 
         TargetText.textProperty().addListener(new ChangeListener<String>() {

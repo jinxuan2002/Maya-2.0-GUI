@@ -17,5 +17,15 @@ public class ModifyMenuController extends SearchMenuController {
     public void GoToCreate(ActionEvent actionEvent) throws Exception {
         main.GoToCreate(ID);
     }
+
+    @FXML
+    public void Delete(ActionEvent actionEvent){
+        if (!SearchTable.getSelectionModel().isEmpty()) {
+            ObservableList<String> list = SearchTable.getSelectionModel().getSelectedItem();
+            DBConnector dbConnector = new DBConnector();
+            dbConnector.DeleteQuery(list.get(0), list.get(1), list.get(2));
+            SearchTable.getItems().removeAll(SearchTable.getSelectionModel().getSelectedItems());
+        }
+    }
 }
 
