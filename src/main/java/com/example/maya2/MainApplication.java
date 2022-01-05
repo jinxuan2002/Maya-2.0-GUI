@@ -30,8 +30,7 @@ public class MainApplication extends Application {
     public void GoToRegister() throws Exception {
         RegisterMenuController registerMenuController = (RegisterMenuController) loadScene("RegisterMenu.fxml");
         registerMenuController.setApp(this);
-        stage.setWidth(614);
-        stage.setHeight(437);
+
     }
 
     public void GoToMaya(String ID, String session) throws Exception {
@@ -77,6 +76,12 @@ public class MainApplication extends Application {
         editMenuController.setIDList(ID, list);
         editMenuController.initializeTextAndBox();
         editMenuController.setApp(this);
+    }
+
+    public void GoToModuleRegister(String ID) throws Exception {
+        RegisterModuleController registerModuleController = (RegisterModuleController) loadScene("RegisterModule.fxml");
+        registerModuleController.setID(ID);
+        registerModuleController.setApp(this);
     }
 
     private Initializable loadScene(String fxml) throws Exception {

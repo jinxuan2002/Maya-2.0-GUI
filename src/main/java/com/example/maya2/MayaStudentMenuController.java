@@ -30,6 +30,10 @@ public class MayaStudentMenuController implements Initializable {
         main.GoToSearch(ID, session);
     }
 
+    public void GoToModuleRegister() throws Exception {
+        main.GoToModuleRegister(ID);
+    }
+
     @FXML
     public void Back(ActionEvent actionEvent) throws Exception {
         main.GoToLogin();
