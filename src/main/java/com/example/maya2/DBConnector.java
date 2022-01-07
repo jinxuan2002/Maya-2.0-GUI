@@ -72,10 +72,22 @@ public class DBConnector {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.fsktm where `Module` Like ? UNION select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.fll where `Module` Like ? UNION select Module,Occurrence,Mode,Day,Start,End,Tutorial,Target,Actual from maya.uni where `Module` Like ?");
+            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ?");
             statement.setString(1,"%" + search +"%");
-            statement.setString(2,"%" + search +"%");
-            statement.setString(3,"%" + search +"%");
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet SearchDistinctQuery(String search){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("select distinct Module,Occurrence from maya.moduledb where `Module` Like ?");
+            statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();
@@ -87,8 +99,8 @@ public class DBConnector {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("UPDATE maya.fsktm SET Day = ?, Start = ?, End = ?, Tutorial = ? WHERE Module = ? AND Occurrence = ? AND Mode = ?");
-            PreparedStatement changeTargetStatement = connection.prepareStatement("UPDATE maya.fsktm SET Target = ? WHERE Module = ? AND Occurrence = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE maya.moduledb SET Day = ?, Start = ?, End = ?, Tutorial = ? WHERE Module = ? AND Occurrence = ? AND Mode = ?");
+            PreparedStatement changeTargetStatement = connection.prepareStatement("UPDATE maya.moduledb SET Target = ? WHERE Module = ? AND Occurrence = ?");
             statement.setString(1, day);
             statement.setString(2, start);
             statement.setString(3, end);
@@ -106,18 +118,11 @@ public class DBConnector {
         }
     }
 
-    public void InsertQuery(String faculty, String module, String occ, String mode, String day, String start, String end, String lecturer, int target){
-        faculty = switch(faculty){
-            case "Faculty of Computer Science and Information Technology" -> "fsktm";
-            case "Faculty of Language and Linguistics" -> "fll";
-            case "University" -> "uni";
-            default -> throw new IllegalStateException("Unexpected value: " + faculty);
-        };
-
+    public void InsertQuery(String module, String occ, String mode, String day, String start, String end, String lecturer, int target){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO maya." + faculty + " (Module, Occurrence, Mode, Day, Start, End, Tutorial, Target, Actual) VALUES (?,?,?,?,?,?,?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.moduledb (Module, Occurrence, Mode, Day, Start, End, Tutorial, Target, Actual) VALUES (?,?,?,?,?,?,?,?,?)");
             statement.setString(1, module.toUpperCase());
             statement.setString(2, occ);
             statement.setString(3, mode);
@@ -136,9 +141,8 @@ public class DBConnector {
     public void DeleteQuery(String module, String occ, String mode){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String[] tables = {"fsktm", "fll", "uni"};
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM maya.fsktm WHERE Module = ? AND Occurrence = ? AND Mode = ?");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM maya.moduledb WHERE Module = ? AND Occurrence = ? AND Mode = ?");
             statement.setString(1, module);
             statement.setString(2, occ);
             statement.setString(3, mode);

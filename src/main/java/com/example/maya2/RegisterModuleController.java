@@ -23,8 +23,11 @@ public class RegisterModuleController implements Initializable {
     private String ID;
     @FXML private TextField SearchField;
     @FXML private TableView<ObservableList<String>> SearchTable;
-    @FXML private TableColumn SearchModuleColumn;
-    @FXML private TableColumn SearchOccColumn;
+    @FXML private TableView<ObservableList<String>> RegisteredTable;
+    @FXML private TableColumn<ObservableList<String>, String> SearchModuleColumn;
+    @FXML private TableColumn<ObservableList<String>, String> SearchOccColumn;
+    @FXML private TableColumn<ObservableList<String>, String> RegisteredModule;
+    @FXML private TableColumn<ObservableList<String>, String> RegisteredOcc;
 
     public void setApp(MainApplication main){
         this.main = main;
@@ -41,7 +44,7 @@ public class RegisterModuleController implements Initializable {
     @FXML
     public void Search(ActionEvent actionEvent){
         DBConnector dbConnector = new DBConnector();
-        ResultSet rs = dbConnector.SearchQuery(SearchField.getText());
+        ResultSet rs = dbConnector.SearchDistinctQuery(SearchField.getText());
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
         try{
             while(rs.next()){
@@ -65,8 +68,34 @@ public class RegisterModuleController implements Initializable {
         SearchTable.setItems(data);
     }
 
+    @FXML
+    public void Add(){
+        if (!SearchTable.getSelectionModel().isEmpty()) {
+            DBConnector dbConnector = new DBConnector();
+            ObservableList<String> selected = SearchTable.getSelectionModel().getSelectedItem();
+
+            boolean valid = true;
+            for(int i = 0; i < RegisteredTable.getItems().size(); i++){
+                if(RegisteredTable.getItems().get(i).get(0).equals(selected.get(0))){
+                    valid = false;
+                    break;
+                }
+            }
+
+            if(valid){
+                RegisteredTable.getItems().add(selected);
+            }
+        }
+    }
+
+    @FXML
+    public void Drop(){
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        RegisteredModule.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
+        RegisteredOcc.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
     }
 }

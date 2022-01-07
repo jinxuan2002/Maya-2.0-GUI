@@ -19,7 +19,6 @@ import java.util.ResourceBundle;
 public class CreateMenuController implements Initializable {
     private MainApplication main;
     private String ID;
-    @FXML private ChoiceBox<String> FacultyBox;
     @FXML private TextField ModuleCode;
     @FXML private TextField ModuleName;
     @FXML private TextField OccText;
@@ -41,7 +40,6 @@ public class CreateMenuController implements Initializable {
     }
 
     public void Create(){
-       String faculty = FacultyBox.getValue();
        String module = String.format("%s - %s", ModuleCode.getText(), ModuleName.getText());
        String occ = OccText.getText();
        String mode = ModeBox.getValue();
@@ -71,7 +69,7 @@ public class CreateMenuController implements Initializable {
                e.printStackTrace();
            }
             if(!same){
-                dbConnector.InsertQuery(faculty, module, occ, mode, day, start, end, lecturer, target);
+                dbConnector.InsertQuery(module, occ, mode, day, start, end, lecturer, target);
                 ErrorText.setText("Entry added successfully!");
             } else{
                 ErrorText.setText("Entry already exist, failed to create entry.");
@@ -93,8 +91,6 @@ public class CreateMenuController implements Initializable {
         ObservableList<String> mode = FXCollections.observableArrayList("TUTORIAL", "ONLINE");
         DayBox.setItems(day);
         DayBox.setValue("Monday");
-        FacultyBox.setItems(faculty);
-        FacultyBox.setValue("Faculty of Computer Science and Information Technology");
         ModeBox.setItems(mode);
         ModeBox.setValue("TUTORIAL");
         ActualText.setText("0");
