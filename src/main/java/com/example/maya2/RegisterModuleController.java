@@ -33,7 +33,7 @@ public class RegisterModuleController implements Initializable {
         this.main = main;
     }
 
-    public void setID(String I){
+    public void setID(String ID){
         this.ID = ID;
     }
 
@@ -73,6 +73,8 @@ public class RegisterModuleController implements Initializable {
         if (!SearchTable.getSelectionModel().isEmpty()) {
             DBConnector dbConnector = new DBConnector();
             ObservableList<String> selected = SearchTable.getSelectionModel().getSelectedItem();
+            ResultSet rs = dbConnector.SearchQuery(selected.get(0));
+            ResultSet student = dbConnector.FindStudent(ID);
 
             boolean valid = true;
             for(int i = 0; i < RegisteredTable.getItems().size(); i++){
@@ -80,6 +82,21 @@ public class RegisterModuleController implements Initializable {
                     valid = false;
                     break;
                 }
+            }
+            try{
+                if(rs.isBeforeFirst()){
+                    rs.next();
+                    student.next();
+                    String programme = rs.getString("Programme");
+                    int muet = rs.getInt("Muet");
+                    if(!student.getString("programme").equals(programme) && programme != null){
+                        valid = false;
+                    } else if(student.getInt("muet") != muet && muet != 0){
+                        valid = false;
+                    }
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
             }
 
             if(valid){

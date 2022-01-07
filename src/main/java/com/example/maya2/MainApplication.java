@@ -30,7 +30,6 @@ public class MainApplication extends Application {
     public void GoToRegister() throws Exception {
         RegisterMenuController registerMenuController = (RegisterMenuController) loadScene("RegisterMenu.fxml");
         registerMenuController.setApp(this);
-
     }
 
     public void GoToMaya(String ID, String session) throws Exception {
