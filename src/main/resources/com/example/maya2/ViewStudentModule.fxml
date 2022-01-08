@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.maya2.ViewStudentModuleController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.ViewStudentModuleController">
+   <children>
+      <TableView fx:id="SearchTable" layoutX="14.0" layoutY="56.0" prefHeight="550.0" prefWidth="958.0">
+        <columns>
+          <TableColumn fx:id="TableModule" prefWidth="332.000018119812" text="Module" />
+          <TableColumn fx:id="TableOcc" minWidth="0.0" prefWidth="36.799957275390625" text="Occ" />
+            <TableColumn fx:id="TableMode" minWidth="8.0" prefWidth="71.99996948242188" text="Mode" />
+            <TableColumn fx:id="TableDay" prefWidth="112.00003051757812" text="Day" />
+            <TableColumn fx:id="TableStart" prefWidth="56.0" text="Start" />
+            <TableColumn fx:id="TableEnd" prefWidth="58.39996337890625" text="End" />
+            <TableColumn fx:id="TableLecturer" prefWidth="192.0" text="Lecturer" />
+            <TableColumn fx:id="TableTarget" minWidth="0.0" prefWidth="51.1998291015625" text="Target" />
+            <TableColumn fx:id="TableActual" prefWidth="45.60001220703123" text="Actual" />
+        </columns>
+      </TableView>
+      <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+   </children>
 </AnchorPane>

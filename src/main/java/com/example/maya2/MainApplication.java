@@ -93,6 +93,15 @@ public class MainApplication extends Application {
         stage.setWidth(610);
     }
 
+    public void GoToViewStudentModule(String ID, String session) throws Exception {
+        ViewStudentModuleController viewStudentModuleController = (ViewStudentModuleController) loadScene("ViewStudentModule.fxml");
+        viewStudentModuleController.setIDSession(ID, session);
+        viewStudentModuleController.initializeModule();
+        viewStudentModuleController.setApp(this);
+        stage.setWidth(1000);
+        stage.setHeight(700);
+    }
+
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));

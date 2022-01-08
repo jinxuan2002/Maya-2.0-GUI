@@ -42,6 +42,11 @@ public class MayaStudentMenuController implements Initializable {
     }
 
     @FXML
+    public void GoToViewStudentModule() throws Exception{
+        main.GoToViewStudentModule(ID, session);
+    }
+
+    @FXML
     public void Back(ActionEvent actionEvent) throws Exception {
         main.GoToLogin();
     }
