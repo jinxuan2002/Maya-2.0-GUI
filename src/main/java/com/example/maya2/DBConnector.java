@@ -164,4 +164,43 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
+
+    public void DeleteModuelForID(String ID){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement delete = connection.prepareStatement("DELETE FROM maya.registered WHERE studentid = ?");
+            delete.setString(1, ID);
+            delete.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void AddModuleForID(String ID, String module, String occ){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement add = connection.prepareStatement("INSERT INTO maya.registered VALUES (?,?,?)");
+            add.setString(1, ID);
+            add.setString(2, module);
+            add.setString(3, occ);
+            add.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ResultSet SearchRegistered(String ID){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement search = connection.prepareStatement("SELECT Module,Occurrence FROM maya.registered WHERE studentid = ?");
+            search.setString(1, ID);
+            return search.executeQuery();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

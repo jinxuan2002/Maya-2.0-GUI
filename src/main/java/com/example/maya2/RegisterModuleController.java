@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -83,15 +82,19 @@ public class RegisterModuleController implements Initializable {
                     break;
                 }
             }
+
             try{
-                if(rs.isBeforeFirst()){
+                if(rs.isBeforeFirst()) {
                     rs.next();
                     student.next();
                     String programme = rs.getString("Programme");
+                    int studentMuet = student.getInt("muet");
                     int muet = rs.getInt("Muet");
-                    if(!student.getString("programme").equals(programme) && programme != null){
+                    if (!student.getString("programme").equals(programme) && programme != null) {
                         valid = false;
-                    } else if(student.getInt("muet") != muet && muet != 0){
+                    } else if(muet == 5 && !(studentMuet >= muet)){
+                        valid = false;
+                    } else if(studentMuet != muet && muet != 0){
                         valid = false;
                     }
                 }
@@ -106,8 +109,39 @@ public class RegisterModuleController implements Initializable {
     }
 
     @FXML
-    public void Drop(){
+    public void Save(ActionEvent event){
+        ObservableList<ObservableList<String>> list =  RegisteredTable.getItems();
+        DBConnector dbConnector = new DBConnector();
+        dbConnector.DeleteModuelForID(ID);
+        for(int i = 0; i < list.size(); i++){
+            String module = list.get(i).get(0);
+            String occ = list.get(i).get(1);
+            dbConnector.AddModuleForID(ID, module, occ);
+        }
+    }
 
+    @FXML
+    public void Drop(){
+        if (!RegisteredTable.getSelectionModel().isEmpty()) {
+            RegisteredTable.getItems().removeAll(RegisteredTable.getSelectionModel().getSelectedItems());
+        }
+    }
+
+    public void InitializeDisplayTable(){
+        DBConnector dbConnector = new DBConnector();
+        ResultSet rs = dbConnector.SearchRegistered(ID);
+
+        try{
+            while(rs.next()){
+                ObservableList<String> list = FXCollections.observableArrayList();
+                list.add(rs.getString(1));
+                list.add(rs.getString(2));
+                RegisteredTable.getItems().add(list);
+
+            }
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
     }
 
     @Override

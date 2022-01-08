@@ -80,6 +80,7 @@ public class MainApplication extends Application {
     public void GoToModuleRegister(String ID) throws Exception {
         RegisterModuleController registerModuleController = (RegisterModuleController) loadScene("RegisterModule.fxml");
         registerModuleController.setID(ID);
+        registerModuleController.InitializeDisplayTable();
         registerModuleController.setApp(this);
     }
 
