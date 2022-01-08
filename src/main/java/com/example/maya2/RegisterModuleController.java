@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -28,6 +29,7 @@ public class RegisterModuleController implements Initializable {
     @FXML private TableColumn<ObservableList<String>, String> SearchOccColumn;
     @FXML private TableColumn<ObservableList<String>, String> RegisteredModule;
     @FXML private TableColumn<ObservableList<String>, String> RegisteredOcc;
+    @FXML private Label CreditLabel;
 
     public void setApp(MainApplication main){
         this.main = main;
@@ -76,6 +78,8 @@ public class RegisterModuleController implements Initializable {
             ObservableList<ObservableList<String>> registered = RegisteredTable.getItems();
             ResultSet module = dbConnector.SearchQuery(selected.get(0), selected.get(1));
             ResultSet student = dbConnector.FindStudent(ID);
+            int credit = Integer.parseInt(CreditLabel.getText().split(" ")[1]);
+
 
             for(int i = 0; i < RegisteredTable.getItems().size(); i++){
                 if(RegisteredTable.getItems().get(i).get(0).equals(selected.get(0))){
@@ -108,22 +112,46 @@ public class RegisterModuleController implements Initializable {
                 String programme = module.getString("Programme");
                 int studentMuet = student.getInt("muet");
                 int muet = module.getInt("Muet");
+                ObservableList<ObservableList<String>> list = FXCollections.observableArrayList();
+                list.add(selected);
                 if (!student.getString("programme").equals(programme) && programme != null) {
                     return;
                 } else if(muet == 5 && !(studentMuet >= muet)){
                     return;
                 } else if(studentMuet != muet && muet != 0){
                     return;
+                } else if(CalculateCredit(list) + credit > 22){
+                    return;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+
             RegisteredTable.getItems().add(selected);
+            CreditLabel.setText("Credit: " + CalculateCredit(RegisteredTable.getItems()));
         }
     }
 
-    public void CalculateCredit(){
-
+    public int CalculateCredit(ObservableList<ObservableList<String>> list){
+        DBConnector dbConnector = new DBConnector();
+        int credit = 0;
+        try{
+            for(ObservableList<String> l : list){
+                ResultSet rs = dbConnector.SearchQuery(l.get(0), l.get(1));
+                while(rs.next()){
+                    if(rs.getString("Start").equals("N/A")){
+                        credit += 2;
+                        continue;
+                    }
+                    int start = rs.getInt("Start");
+                    int end = rs.getInt("End");
+                    credit += (int) Math.ceil((end - start) / 100.0);
+                }
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return credit;
     }
 
     @FXML
@@ -142,13 +170,13 @@ public class RegisterModuleController implements Initializable {
     public void Drop(){
         if (!RegisteredTable.getSelectionModel().isEmpty()) {
             RegisteredTable.getItems().removeAll(RegisteredTable.getSelectionModel().getSelectedItems());
+            CreditLabel.setText("Credit: " + CalculateCredit(RegisteredTable.getItems()));
         }
     }
 
     public void InitializeDisplayTable(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchRegistered(ID);
-
         try{
             while(rs.next()){
                 ObservableList<String> list = FXCollections.observableArrayList();
@@ -159,6 +187,7 @@ public class RegisterModuleController implements Initializable {
         } catch(SQLException e){
             e.printStackTrace();
         }
+        CreditLabel.setText("Credit: " + CalculateCredit(RegisteredTable.getItems()));
     }
 
     @Override
