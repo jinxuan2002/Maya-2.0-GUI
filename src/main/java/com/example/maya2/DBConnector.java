@@ -210,7 +210,7 @@ public class DBConnector {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement search = connection.prepareStatement("SELECT Module,Occurrence FROM maya.registered WHERE studentid = ?");
+            PreparedStatement search = connection.prepareStatement("SELECT Module,Occurrence FROM maya.registered WHERE studentid = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             search.setString(1, ID);
             return search.executeQuery();
         } catch (SQLException | ClassNotFoundException e){

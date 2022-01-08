@@ -26,12 +26,19 @@ public class MayaStudentMenuController implements Initializable {
         WelcomeText.setText("Welcome to Maya, " + ID);
     }
 
+    @FXML
     public void GoToSearch(ActionEvent actionEvent) throws Exception {
         main.GoToSearch(ID, session);
     }
 
+    @FXML
     public void GoToModuleRegister() throws Exception {
         main.GoToModuleRegister(ID);
+    }
+
+    @FXML
+    public void GoToTimetable() throws  Exception{
+        main.GoToTimetable(ID);
     }
 
     @FXML

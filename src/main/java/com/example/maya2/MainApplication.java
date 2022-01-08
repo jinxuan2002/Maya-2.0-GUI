@@ -84,6 +84,15 @@ public class MainApplication extends Application {
         registerModuleController.setApp(this);
     }
 
+    public void GoToTimetable(String ID) throws Exception{
+        TimetableMenu timetableMenu = (TimetableMenu) loadScene("TimetableMenu.fxml");
+        timetableMenu.setID(ID);
+        timetableMenu.initializeTimetable();
+        timetableMenu.setApp(this);
+        stage.setHeight(535);
+        stage.setWidth(610);
+    }
+
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));
