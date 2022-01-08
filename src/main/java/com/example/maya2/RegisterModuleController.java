@@ -14,6 +14,7 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -72,40 +73,57 @@ public class RegisterModuleController implements Initializable {
         if (!SearchTable.getSelectionModel().isEmpty()) {
             DBConnector dbConnector = new DBConnector();
             ObservableList<String> selected = SearchTable.getSelectionModel().getSelectedItem();
-            ResultSet rs = dbConnector.SearchQuery(selected.get(0));
+            ObservableList<ObservableList<String>> registered = RegisteredTable.getItems();
+            ResultSet module = dbConnector.SearchQuery(selected.get(0), selected.get(1));
             ResultSet student = dbConnector.FindStudent(ID);
 
-            boolean valid = true;
             for(int i = 0; i < RegisteredTable.getItems().size(); i++){
                 if(RegisteredTable.getItems().get(i).get(0).equals(selected.get(0))){
-                    valid = false;
-                    break;
+                    return;
                 }
             }
 
             try{
-                if(rs.isBeforeFirst()) {
-                    rs.next();
-                    student.next();
-                    String programme = rs.getString("Programme");
-                    int studentMuet = student.getInt("muet");
-                    int muet = rs.getInt("Muet");
-                    if (!student.getString("programme").equals(programme) && programme != null) {
-                        valid = false;
-                    } else if(muet == 5 && !(studentMuet >= muet)){
-                        valid = false;
-                    } else if(studentMuet != muet && muet != 0){
-                        valid = false;
+                for(ObservableList<String> r : registered){
+                    ResultSet rs = dbConnector.SearchQuery(r.get(0), r.get(1));
+                    while(rs.next()){
+                        while(module.next()){
+                            if(rs.getString("Day").equals("N/A") || module.getString("Day").equals("N/A")){
+                                continue;
+                            }
+                            int start = module.getInt("Start");
+                            int end = module.getInt("End");
+                            int registeredStart = rs.getInt("Start");
+                            int registeredEnd = rs.getInt("End");
+                            if(rs.getString("Day").equals(module.getString("Day")) && ((start >= registeredStart && start < registeredEnd) || (end > registeredStart && end <= registeredEnd))){
+                                return;
+                            }
+                        }
+                        module.beforeFirst();
                     }
                 }
-            } catch (SQLException e){
+
+                module.next();
+                student.next();
+                String programme = module.getString("Programme");
+                int studentMuet = student.getInt("muet");
+                int muet = module.getInt("Muet");
+                if (!student.getString("programme").equals(programme) && programme != null) {
+                    return;
+                } else if(muet == 5 && !(studentMuet >= muet)){
+                    return;
+                } else if(studentMuet != muet && muet != 0){
+                    return;
+                }
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
-
-            if(valid){
-                RegisteredTable.getItems().add(selected);
-            }
+            RegisteredTable.getItems().add(selected);
         }
+    }
+
+    public void CalculateCredit(){
+
     }
 
     @FXML
@@ -113,9 +131,9 @@ public class RegisterModuleController implements Initializable {
         ObservableList<ObservableList<String>> list =  RegisteredTable.getItems();
         DBConnector dbConnector = new DBConnector();
         dbConnector.DeleteModuelForID(ID);
-        for(int i = 0; i < list.size(); i++){
-            String module = list.get(i).get(0);
-            String occ = list.get(i).get(1);
+        for (ObservableList<String> l : list) {
+            String module = l.get(0);
+            String occ = l.get(1);
             dbConnector.AddModuleForID(ID, module, occ);
         }
     }
@@ -137,7 +155,6 @@ public class RegisterModuleController implements Initializable {
                 list.add(rs.getString(1));
                 list.add(rs.getString(2));
                 RegisteredTable.getItems().add(list);
-
             }
         } catch(SQLException e){
             e.printStackTrace();

@@ -94,6 +94,36 @@ public class DBConnector {
         return rs;
     }
 
+    public ResultSet SearchQuery(String search, String occ){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? AND `Occurrence` = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1,"%" + search +"%");
+            statement.setString(2, occ);
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet GetTime(String search, String occ){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("select Day,Start,End from maya.moduledb where Module = ? AND Occurrence = ?");
+            statement.setString(1, search);
+            statement.setString(2, occ);
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
     public ResultSet SearchDistinctQuery(String search){
         ResultSet rs = null;
         try{
