@@ -13,9 +13,7 @@
          </font>
       </Text>
       <Button fx:id="MayaStudentBack" layoutX="51.0" layoutY="37.0" mnemonicParsing="false" onAction="#Back" prefWidth="41.0" text="Back" />
-      <Button layoutX="97.0" layoutY="108.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="Register Module" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="247.0" layoutY="108.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="View Module" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="407.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToModify" prefHeight="58.0" prefWidth="96.0" text="Modify Module" textAlignment="CENTER" wrapText="true" />
-      <Button layoutX="97.0" layoutY="208.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="96.0" text="View Timetable" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="101.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToModify" prefHeight="58.0" prefWidth="96.0" text="Modify Module" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>
