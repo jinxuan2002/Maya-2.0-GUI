@@ -241,7 +241,6 @@ public class DBConnector {
     public ResultSet SearchRegistered(String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement search = connection.prepareStatement("SELECT * FROM maya.registered WHERE Module = ? AND Occurrence = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             search.setString(1, module);
             search.setString(2, occ);
