@@ -6,11 +6,18 @@ import java.sql.*;
 
 public class DBConnector {
     private Connection connection;
+
+    public DBConnector(){
+        try{
+            this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     
     public ResultSet StudentLoginQuery(String ID, String password){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.student where studentid = ? AND password = ?");
             statement.setString(1, ID);
             statement.setString(2, password);
@@ -24,7 +31,6 @@ public class DBConnector {
     public ResultSet FindStudent(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.student where studentid = ?");
             statement.setString(1, ID);
             return statement.executeQuery();
@@ -37,7 +43,6 @@ public class DBConnector {
     public ResultSet StaffLoginQuery(String ID, String password){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.staff where username = ? AND password = ?");
             statement.setString(1, ID);
             statement.setString(2, password);
@@ -51,7 +56,6 @@ public class DBConnector {
     public ResultSet StaffIDQuery(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.staff where username = ?");
             statement.setString(1, ID);
             return statement.executeQuery();
@@ -64,7 +68,6 @@ public class DBConnector {
     public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.student VALUES(?,?,?,?,?,?)");
             statement.setString(1, ID);
             statement.setString(2, email);
@@ -81,7 +84,6 @@ public class DBConnector {
     public void StaffRegisterUpdate(String username, String mail, String password, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.staff VALUES(?,?,?,?)");
             statement.setString(1, username);
             statement.setString(2, mail);
@@ -97,7 +99,6 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ?");
             statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
@@ -111,7 +112,6 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? AND `Occurrence` = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1,"%" + search +"%");
             statement.setString(2, occ);
@@ -126,7 +126,6 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Tutorial` Like ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1,"%" + lecture +"%");
             rs = statement.executeQuery();
@@ -140,7 +139,6 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("select distinct Module,Occurrence from maya.moduledb where `Module` Like ?");
             statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
@@ -153,7 +151,6 @@ public class DBConnector {
     public void EditQuery(ObservableList<String> list, String day, String start, String end, String Lecturer, int target){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("UPDATE maya.moduledb SET Day = ?, Start = ?, End = ?, Tutorial = ? WHERE Module = ? AND Occurrence = ? AND Mode = ?");
             PreparedStatement changeTargetStatement = connection.prepareStatement("UPDATE maya.moduledb SET Target = ? WHERE Module = ? AND Occurrence = ?");
             statement.setString(1, day);
@@ -176,7 +173,6 @@ public class DBConnector {
     public void InsertQuery(String module, String occ, String mode, String day, String start, String end, String lecturer, int target){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("INSERT INTO maya.moduledb (Module, Occurrence, Mode, Day, Start, End, Tutorial, Target, Actual) VALUES (?,?,?,?,?,?,?,?,?)");
             statement.setString(1, module.toUpperCase());
             statement.setString(2, occ);
@@ -196,7 +192,6 @@ public class DBConnector {
     public void DeleteQuery(String module, String occ, String mode){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement statement = connection.prepareStatement("DELETE FROM maya.moduledb WHERE Module = ? AND Occurrence = ? AND Mode = ?");
             statement.setString(1, module);
             statement.setString(2, occ);
@@ -210,7 +205,6 @@ public class DBConnector {
     public void DeleteModuelForID(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement delete = connection.prepareStatement("DELETE FROM maya.registered WHERE studentid = ?");
             delete.setString(1, ID);
             delete.executeUpdate();
@@ -222,7 +216,6 @@ public class DBConnector {
     public void AddModuleForID(String ID, String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
             PreparedStatement add = connection.prepareStatement("INSERT INTO maya.registered VALUES (?,?,?)");
             add.setString(1, ID);
             add.setString(2, module);
@@ -236,9 +229,22 @@ public class DBConnector {
     public ResultSet SearchRegistered(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
-            PreparedStatement search = connection.prepareStatement("SELECT Module,Occurrence FROM maya.registered WHERE studentid = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement search = connection.prepareStatement("SELECT * FROM maya.registered WHERE studentid = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             search.setString(1, ID);
+            return search.executeQuery();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ResultSet SearchRegistered(String module, String occ){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement search = connection.prepareStatement("SELECT * FROM maya.registered WHERE Module = ? AND Occurrence = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            search.setString(1, module);
+            search.setString(2, occ);
             return search.executeQuery();
         } catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();

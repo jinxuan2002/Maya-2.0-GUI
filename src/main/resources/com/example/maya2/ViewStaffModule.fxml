@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="621.0" prefWidth="980.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.ViewStaffModuleController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.ViewStaffModuleController">
    <children>
       <TableView fx:id="SearchTable" layoutX="14.0" layoutY="56.0" prefHeight="550.0" prefWidth="958.0">
         <columns>
@@ -21,5 +21,6 @@
         </columns>
       </TableView>
       <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+      <Button layoutX="852.0" layoutY="14.0" mnemonicParsing="false" onAction="#GoToViewStudentList" prefHeight="34.0" prefWidth="98.0" text="View Selected" />
    </children>
 </AnchorPane>

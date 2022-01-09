@@ -111,6 +111,14 @@ public class MainApplication extends Application {
         stage.setHeight(700);
     }
 
+    public void GoToViewStudentList(String ID, ObservableList<String> selected) throws Exception{
+        ViewStudentListController viewStudentListController = (ViewStudentListController) loadScene("ViewStudentList.fxml");
+        viewStudentListController.setID(ID);
+        viewStudentListController.setList(selected);
+        viewStudentListController.InitializeStudentList();
+        viewStudentListController.setApp(this);
+    }
+
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));

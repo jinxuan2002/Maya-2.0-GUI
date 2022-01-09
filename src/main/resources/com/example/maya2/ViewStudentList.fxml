@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="646.0" prefWidth="978.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.ViewStudentListController">
+   <children>
+      <TableView fx:id="StudentTable" layoutX="14.0" layoutY="56.0" prefHeight="550.0" prefWidth="957.0">
+        <columns>
+          <TableColumn fx:id="ColumnNo" prefWidth="46.39999008178711" text="No." />
+            <TableColumn fx:id="IDColumn" prefWidth="145.5999755859375" text="Student ID" />
+            <TableColumn fx:id="NameColumn" prefWidth="763.2000579833984" text="Student Name" />
+        </columns>
+      </TableView>
+      <Button layoutX="28.0" layoutY="23.0" mnemonicParsing="false" onAction="#Back" text="Back" />
+   </children>
+</AnchorPane>

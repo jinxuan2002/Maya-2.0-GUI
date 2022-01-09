@@ -180,8 +180,8 @@ public class RegisterModuleController implements Initializable {
         try{
             while(rs.next()){
                 ObservableList<String> list = FXCollections.observableArrayList();
-                list.add(rs.getString(1));
                 list.add(rs.getString(2));
+                list.add(rs.getString(3));
                 RegisteredTable.getItems().add(list);
             }
         } catch(SQLException e){
