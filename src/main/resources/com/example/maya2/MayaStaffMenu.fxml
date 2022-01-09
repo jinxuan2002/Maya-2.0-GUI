@@ -15,5 +15,6 @@
       <Button fx:id="MayaStudentBack" layoutX="51.0" layoutY="37.0" mnemonicParsing="false" onAction="#Back" prefWidth="41.0" text="Back" />
       <Button layoutX="247.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToViewStaffModule" prefHeight="58.0" prefWidth="96.0" text="View Module" textAlignment="CENTER" wrapText="true" />
       <Button layoutX="101.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToModify" prefHeight="58.0" prefWidth="96.0" text="Modify Module" textAlignment="CENTER" wrapText="true" />
+      <Button layoutX="392.0" layoutY="108.0" mnemonicParsing="false" onAction="#GoToStatsMenu" prefHeight="58.0" prefWidth="96.0" text="Module Statistics" textAlignment="CENTER" wrapText="true" />
    </children>
 </AnchorPane>

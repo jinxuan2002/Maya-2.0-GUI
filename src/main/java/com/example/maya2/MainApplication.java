@@ -119,6 +119,14 @@ public class MainApplication extends Application {
         viewStudentListController.setApp(this);
     }
 
+    public void GoToStatsMenu(String ID) throws Exception{
+        StatsMenuController statsMenuController = (StatsMenuController) loadScene("StatsMenu.fxml");
+        statsMenuController.setID(ID);
+        statsMenuController.setApp(this);
+        stage.setWidth(1000);
+        stage.setHeight(700);
+    }
+
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));

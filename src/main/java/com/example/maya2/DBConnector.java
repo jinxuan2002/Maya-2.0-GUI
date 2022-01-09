@@ -147,11 +147,24 @@ public class DBConnector {
         return rs;
     }
 
-    public ResultSet SearchDistinctQuery(String search){
+    public ResultSet SearchDistinctModuleOcc(String search){
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             PreparedStatement statement = connection.prepareStatement("select distinct Module,Occurrence from maya.moduledb where `Module` Like ?");
+            statement.setString(1,"%" + search +"%");
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet SearchDistinctModule(String search){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement statement = connection.prepareStatement("select distinct Module from maya.moduledb where `Module` Like ?");
             statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){

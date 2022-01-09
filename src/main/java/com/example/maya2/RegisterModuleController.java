@@ -15,7 +15,6 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -47,7 +46,7 @@ public class RegisterModuleController implements Initializable {
     @FXML
     public void Search(ActionEvent actionEvent){
         DBConnector dbConnector = new DBConnector();
-        ResultSet rs = dbConnector.SearchDistinctQuery(SearchField.getText());
+        ResultSet rs = dbConnector.SearchDistinctModuleOcc(SearchField.getText());
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
         try{
             while(rs.next()){

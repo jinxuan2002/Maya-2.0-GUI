@@ -18,4 +18,9 @@ public class MayaStaffMenuController extends MayaStudentMenuController {
     public void GoToViewStaffModule(ActionEvent actionEvent) throws Exception {
         main.GoToViewStaffModule(ID, session);
     }
+
+    @FXML
+    public void GoToStatsMenu(ActionEvent actionEvent) throws Exception{
+        main.GoToStatsMenu(ID);
+    }
 }
