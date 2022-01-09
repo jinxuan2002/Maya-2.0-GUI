@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.*;
 
 public class RegisterMenuController implements Initializable {
@@ -52,27 +53,30 @@ public class RegisterMenuController implements Initializable {
 
     @FXML
     public void Register(ActionEvent actionEvent) throws Exception {
-        boolean validity = true;
+        DBConnector dbConnector = new DBConnector();
+        ResultSet studentIDList = dbConnector.FindStudent(ID.getText());
+        ResultSet staffIDList = dbConnector.FindStaff(ID.getText());
+
+        if(studentIDList.isBeforeFirst() || staffIDList.isBeforeFirst()){
+            return;
+        }
         if(realName.getText().isEmpty()){
-           validity = false;
+           return;
         }
         if((ID.getText().charAt(0) != 'U' || ID.getText().length() != 8) && Student.isSelected()){
-            validity = false;
+            return;
         }
         if(!password.getText().equals(cpassword.getText()) || password.getText().length() == 0){
-            validity = false;
+            return;
         }
         if(email.getText().contains("@")){
-            validity = false;
+            return;
         }
-
-        if(validity && Student.isSelected()){
-            DBConnector dbConnector = new DBConnector();
+        if(Student.isSelected()){
             dbConnector.StudentRegisterUpdate(ID.getText(), password.getText(), email.getText().toLowerCase() + "@siswa.um.edu.my", programme.getValue(), muet.getValue(),realName.getText());
             main.GoToLogin();
         }
-        if(validity && Staff.isSelected()){
-            DBConnector dbConnector = new DBConnector();
+        if(Staff.isSelected()){
             dbConnector.StaffRegisterUpdate(ID.getText(), email.getText().toLowerCase() + "@um.edu.my", password.getText(), realName.getText().toUpperCase());
             main.GoToLogin();
         }

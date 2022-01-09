@@ -40,6 +40,18 @@ public class DBConnector {
         return null;
     }
 
+    public ResultSet FindStaff(String ID){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.staff where username = ?");
+            statement.setString(1, ID);
+            return statement.executeQuery();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ResultSet StaffLoginQuery(String ID, String password){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
