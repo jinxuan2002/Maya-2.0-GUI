@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="401.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.maya2.RegisterModuleController">
    <children>
@@ -27,6 +28,11 @@
         </columns>
       </TableView>
       <Button layoutX="529.0" layoutY="361.0" mnemonicParsing="false" onAction="#Save" text="Save" />
-      <Label fx:id="CreditLabel" layoutX="342.0" layoutY="352.0" text="Credit: 0" />
+      <Label fx:id="CreditLabel" layoutX="342.0" layoutY="77.0" text="Credit: 0" />
+      <Label fx:id="ErrorLabel" alignment="TOP_LEFT" layoutX="26.0" layoutY="353.0" prefHeight="40.0" prefWidth="490.0" text="Label" textFill="RED" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

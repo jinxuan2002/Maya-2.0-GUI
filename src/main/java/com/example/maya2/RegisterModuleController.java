@@ -30,6 +30,7 @@ public class RegisterModuleController implements Initializable {
     @FXML private TableColumn<ObservableList<String>, String> RegisteredModule;
     @FXML private TableColumn<ObservableList<String>, String> RegisteredOcc;
     @FXML private Label CreditLabel;
+    @FXML private Label ErrorLabel;
 
     public void setApp(MainApplication main){
         this.main = main;
@@ -79,10 +80,11 @@ public class RegisterModuleController implements Initializable {
             ResultSet module = dbConnector.SearchQuery(selected.get(0), selected.get(1));
             ResultSet student = dbConnector.FindStudent(ID);
             int credit = Integer.parseInt(CreditLabel.getText().split(" ")[1]);
-
+            ErrorLabel.setText("");
 
             for(int i = 0; i < RegisteredTable.getItems().size(); i++){
                 if(RegisteredTable.getItems().get(i).get(0).equals(selected.get(0))){
+                    ErrorLabel.setText("You already registered for the same type of module.");
                     return;
                 }
             }
@@ -100,6 +102,7 @@ public class RegisterModuleController implements Initializable {
                             int registeredStart = rs.getInt("Start");
                             int registeredEnd = rs.getInt("End");
                             if(rs.getString("Day").equals(module.getString("Day")) && ((start >= registeredStart && start < registeredEnd) || (end > registeredStart && end <= registeredEnd))){
+                                ErrorLabel.setText("Unable to add module, time clashes with existing registered module.");
                                 return;
                             }
                         }
@@ -117,14 +120,19 @@ public class RegisterModuleController implements Initializable {
                 ObservableList<ObservableList<String>> list = FXCollections.observableArrayList();
                 list.add(selected);
                 if (!student.getString("programme").equals(programme) && programme != null) {
+                    ErrorLabel.setText("Unable to add module, the selected module requires you to be under a different programme.");
                     return;
                 } else if(muet == 5 && !(studentMuet >= muet)){
+                    ErrorLabel.setText("Your MUET band does not match with the requirements of the selected module.");
                     return;
                 } else if(studentMuet != muet && muet != 0){
+                    ErrorLabel.setText("Your MUET band does not match with the requirements of the selected module.");
                     return;
                 } else if(CalculateCredit(list) + credit > 22){
+                    ErrorLabel.setText("Unable to add module, maximum credit hours will be exceed");
                     return;
                 } else if(actual + 1 > target){
+                    ErrorLabel.setText("Unable to add moudule, module already reached the target number of students.");
                     return;
                 }
             } catch (SQLException e) {
@@ -210,5 +218,6 @@ public class RegisterModuleController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RegisteredModule.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));
         RegisteredOcc.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(1)));
+        ErrorLabel.setText("");
     }
 }
