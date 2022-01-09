@@ -13,6 +13,7 @@ import java.util.*;
 public class RegisterMenuController implements Initializable {
     private MainApplication main;
     @FXML private Text MailPrefix;
+    @FXML private Text IDText;
     @FXML private TextField realName;
     @FXML private TextField email;
     @FXML private TextField ID;
@@ -22,6 +23,8 @@ public class RegisterMenuController implements Initializable {
     @FXML private ChoiceBox<Integer> muet;
     @FXML private RadioButton Student;
     @FXML private RadioButton Staff;
+    @FXML private Label IDLabel;
+    @FXML private Label ErrorLabel;
 
 
     public void setApp(MainApplication main){
@@ -37,6 +40,8 @@ public class RegisterMenuController implements Initializable {
     public void SelectStudent(ActionEvent actionEvent){
         Student.setSelected(true);
         Staff.setSelected(false);
+        IDText.setText("ID:");
+        IDLabel.setText("*U followed by 7 numbers");
         MailPrefix.setText("@siswa.um.edu.my");
         programme.setDisable(false);
         muet.setDisable(false);
@@ -46,6 +51,8 @@ public class RegisterMenuController implements Initializable {
     public void SelectStaff(ActionEvent actionEvent){
         Student.setSelected(false);
         Staff.setSelected(true);
+        IDText.setText("Username:");
+        IDLabel.setText("");
         MailPrefix.setText("@um.edu.my");
         programme.setDisable(true);
         muet.setDisable(true);
@@ -56,20 +63,30 @@ public class RegisterMenuController implements Initializable {
         DBConnector dbConnector = new DBConnector();
         ResultSet studentIDList = dbConnector.FindStudent(ID.getText());
         ResultSet staffIDList = dbConnector.FindStaff(ID.getText());
+        ErrorLabel.setText("");
 
         if(studentIDList.isBeforeFirst() || staffIDList.isBeforeFirst()){
+            ErrorLabel.setText("ID or username is already taken.");
             return;
         }
-        if(realName.getText().isEmpty()){
+        if(realName.getText().isEmpty() || email.getText().isEmpty() || ID.getText().isEmpty() || password.getText().isEmpty() || cpassword.getText().isEmpty()){
+            ErrorLabel.setText("Any of the field cannot be empty.");
            return;
         }
         if((ID.getText().charAt(0) != 'U' || ID.getText().length() != 8) && Student.isSelected()){
+            ErrorLabel.setText("Student ID is not in the form of U followed by 7 numbers eg: U1234567.");
             return;
         }
-        if(!password.getText().equals(cpassword.getText()) || password.getText().length() == 0){
+        if(!password.getText().equals(cpassword.getText())){
+            ErrorLabel.setText("Password and confirm password is not the same.");
+            return;
+        }
+        if(password.getText().length() < 8){
+            ErrorLabel.setText("Password is too short, minimum is 8 characters long.");
             return;
         }
         if(email.getText().contains("@")){
+            ErrorLabel.setText("Email field cannot contains '@'.");
             return;
         }
         if(Student.isSelected()){
@@ -91,5 +108,6 @@ public class RegisterMenuController implements Initializable {
         programme.setValue("SE");
         muet.setValue(1);
         Student.setSelected(true);
+        ErrorLabel.setText("");
     }
 }
