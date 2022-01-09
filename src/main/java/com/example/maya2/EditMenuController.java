@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ public class EditMenuController implements Initializable {
     @FXML private TextField LecturerText;
     @FXML private TextField TargetText;
     @FXML private TextField ActualText;
+    @FXML private Label ErrorLabel;
 
     public void setApp(MainApplication main){
         this.main = main;
@@ -53,6 +55,7 @@ public class EditMenuController implements Initializable {
     @FXML
     public void Update(ActionEvent actionEvent){
         DBConnector dbConnector = new DBConnector();
+        ErrorLabel.setText("");
         String start = StartText.getText();
         String end = EndText.getText();
         int target = Integer.parseInt(TargetText.getText());
@@ -63,6 +66,8 @@ public class EditMenuController implements Initializable {
         if(Integer.parseInt(start) < Integer.parseInt(end) && target > 0 && Integer.parseInt(start) <= 2400 && Integer.parseInt(end) <= 2400){
             dbConnector.EditQuery(list, DayBox.getValue(), start,
                     end, LecturerText.getText(), target);
+        } else{
+            ErrorLabel.setText("Please enter a valid time in 24 hour format.");
         }
     }
 
@@ -75,6 +80,7 @@ public class EditMenuController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday", "N/A");
         DayBox.setItems(day);
+        ErrorLabel.setText("");
 
         TargetText.textProperty().addListener(new ChangeListener<String>() {
             @Override

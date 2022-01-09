@@ -55,26 +55,24 @@ public class CreateMenuController implements Initializable {
        if(Integer.parseInt(start) < Integer.parseInt(end) && target > 0 && ModuleCode.getText().length() <= 8 && Integer.parseInt(start) <= 2400 && Integer.parseInt(end) <= 2400){
            DBConnector dbConnector = new DBConnector();
            ResultSet rs = dbConnector.SearchQuery(ModuleCode.getText());
-           boolean same = false;
            try{
                if(rs.isBeforeFirst()){
                    while(rs.next()){
                        if(rs.getString("Occurrence").equals(occ) && rs.getString("Mode").equals(mode)){
-                           same = true;
-                           break;
+                           ErrorText.setText("Entry already exist, failed to create entry.");
+                           return;
                        }
                    }
                }
            } catch(SQLException e){
                e.printStackTrace();
            }
-            if(!same){
-                dbConnector.InsertQuery(module, occ, mode, day, start, end, lecturer, target);
-                ErrorText.setText("Entry added successfully!");
-            } else{
-                ErrorText.setText("Entry already exist, failed to create entry.");
-            }
+           dbConnector.InsertQuery(module, occ, mode, day, start, end, lecturer, target);
+           ErrorText.setText("Entry added successfully!");
+       } else{
+           ErrorText.setText("Please enter a valid time in 24 hour format.");
        }
+
     }
 
     @FXML
@@ -94,6 +92,7 @@ public class CreateMenuController implements Initializable {
         ModeBox.setItems(mode);
         ModeBox.setValue("TUTORIAL");
         ActualText.setText("0");
+        ErrorText.setText("");
 
         TargetText.textProperty().addListener(new ChangeListener<String>() {
             @Override

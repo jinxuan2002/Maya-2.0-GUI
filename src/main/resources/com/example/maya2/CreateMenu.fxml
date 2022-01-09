@@ -31,7 +31,7 @@
       <Text layoutX="354.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="-" />
       <TextField fx:id="ModuleName" layoutX="367.0" layoutY="115.0" prefHeight="26.0" prefWidth="393.0" />
       <ChoiceBox fx:id="ModeBox" layoutX="221.0" layoutY="194.0" prefHeight="26.0" prefWidth="109.0" />
-      <Text fx:id="ErrorText" fill="RED" layoutX="222.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="445.6">
+      <Text fx:id="ErrorText" fill="RED" layoutX="222.0" layoutY="482.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Label" wrappingWidth="445.6">
          <font>
             <Font size="16.0" />
          </font>

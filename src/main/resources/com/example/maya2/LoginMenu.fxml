@@ -14,7 +14,7 @@
       <TextField fx:id="LoginID" layoutX="226.0" layoutY="95.0" />
       <Text layoutX="207.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:" wrappingWidth="18.00738525390625" />
       <Text layoutX="170.0" layoutY="152.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="54.00738525390625" />
-      <Label fx:id="LoginErrorMsg" layoutX="226.0" layoutY="161.0" prefHeight="18.0" prefWidth="150.0" textAlignment="CENTER" AnchorPane.topAnchor="161.0" />
+      <Label fx:id="LoginErrorMsg" layoutX="226.0" layoutY="161.0" prefHeight="18.0" prefWidth="150.0" textAlignment="CENTER" textFill="RED" AnchorPane.topAnchor="161.0" />
       <PasswordField fx:id="LoginPassword" layoutX="226.0" layoutY="135.0" />
    </children>
 </AnchorPane>
