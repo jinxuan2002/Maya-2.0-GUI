@@ -48,6 +48,19 @@ public class DBConnector {
         return null;
     }
 
+    public ResultSet StaffIDQuery(String ID){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.staff where username = ?");
+            statement.setString(1, ID);
+            return statement.executeQuery();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -102,6 +115,20 @@ public class DBConnector {
             PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? AND `Occurrence` = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1,"%" + search +"%");
             statement.setString(2, occ);
+            rs = statement.executeQuery();
+        } catch(SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+    public ResultSet SearchLecturer(String lecture){
+        ResultSet rs = null;
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
+            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Tutorial` Like ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            statement.setString(1,"%" + lecture +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){
             e.printStackTrace();

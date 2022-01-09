@@ -62,7 +62,7 @@ public class RegisterMenuController implements Initializable {
         if(!password.getText().equals(cpassword.getText()) || password.getText().length() == 0){
             validity = false;
         }
-        if(email.getText().contains("@") || email.getText().contains(".")){
+        if(email.getText().contains("@")){
             validity = false;
         }
 
