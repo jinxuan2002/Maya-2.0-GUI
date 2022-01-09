@@ -250,4 +250,28 @@ public class DBConnector {
         }
         return null;
     }
+
+    public void AddToActual(String module, String occ){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement update = connection.prepareStatement("UPDATE maya.moduledb SET Actual = Actual + 1 WHERE Module = ? AND Occurrence = ?");
+            update.setString(1, module);
+            update.setString(2, occ);
+            update.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void RemoveFromActual(String module, String occ){
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            PreparedStatement update = connection.prepareStatement("UPDATE maya.moduledb SET Actual = Actual - 1 WHERE Module = ? AND Occurrence = ?");
+            update.setString(1, module);
+            update.setString(2, occ);
+            update.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e){
+            e.printStackTrace();
+        }
+    }
 }

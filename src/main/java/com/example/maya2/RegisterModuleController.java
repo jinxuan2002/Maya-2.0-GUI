@@ -112,6 +112,8 @@ public class RegisterModuleController implements Initializable {
                 String programme = module.getString("Programme");
                 int studentMuet = student.getInt("muet");
                 int muet = module.getInt("Muet");
+                int target = module.getInt("Target");
+                int actual = module.getInt("Actual");
                 ObservableList<ObservableList<String>> list = FXCollections.observableArrayList();
                 list.add(selected);
                 if (!student.getString("programme").equals(programme) && programme != null) {
@@ -121,6 +123,8 @@ public class RegisterModuleController implements Initializable {
                 } else if(studentMuet != muet && muet != 0){
                     return;
                 } else if(CalculateCredit(list) + credit > 22){
+                    return;
+                } else if(actual + 1 > target){
                     return;
                 }
             } catch (SQLException e) {
@@ -158,11 +162,23 @@ public class RegisterModuleController implements Initializable {
     public void Save(ActionEvent event){
         ObservableList<ObservableList<String>> list =  RegisteredTable.getItems();
         DBConnector dbConnector = new DBConnector();
+        ResultSet registered = dbConnector.SearchRegistered(ID);
+        try{
+            while(registered.next()){
+                String module = registered.getString("Module");
+                String occ = registered.getString("Occurrence");
+                dbConnector.RemoveFromActual(module, occ);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         dbConnector.DeleteModuelForID(ID);
         for (ObservableList<String> l : list) {
             String module = l.get(0);
             String occ = l.get(1);
             dbConnector.AddModuleForID(ID, module, occ);
+            dbConnector.AddToActual(module, occ);
         }
     }
 
