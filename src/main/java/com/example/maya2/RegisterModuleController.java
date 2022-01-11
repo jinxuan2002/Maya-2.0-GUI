@@ -118,7 +118,8 @@ public class RegisterModuleController implements Initializable {
                 int actual = module.getInt("Actual");
                 ObservableList<ObservableList<String>> list = FXCollections.observableArrayList();
                 list.add(selected);
-                if (!student.getString("programme").equals(programme) && programme != null) {
+                if (!student.getString("programme").equals(programme) && !programme.isBlank()) {
+                    System.out.println(programme);
                     ErrorLabel.setText("Unable to add module, the selected module requires you to be under a different programme.");
                     return;
                 } else if(muet == 5 && !(studentMuet >= muet)){

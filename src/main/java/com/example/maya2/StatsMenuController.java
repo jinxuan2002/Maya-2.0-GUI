@@ -100,7 +100,7 @@ public class StatsMenuController implements Initializable {
                     DisplayData(module);
                 }
             });
-            return row ;
+            return row;
         });
     }
 }
