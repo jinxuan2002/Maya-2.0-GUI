@@ -21,7 +21,7 @@ public class ViewStaffModuleController extends SearchMenuController {
     public void InitializeModule(){
         DBConnector dbConnector = new DBConnector();
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
-        ResultSet idList = dbConnector.StaffIDQuery(ID);
+        ResultSet idList = dbConnector.FindStaff(ID);
 
         try{
             idList.next();

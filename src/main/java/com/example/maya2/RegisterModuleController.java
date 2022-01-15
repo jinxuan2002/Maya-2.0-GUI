@@ -180,7 +180,7 @@ public class RegisterModuleController implements Initializable {
             e.printStackTrace();
         }
 
-        dbConnector.DeleteModuelForID(ID);
+        dbConnector.DeleteModuleForID(ID);
         for (ObservableList<String> l : list) {
             String module = l.get(0);
             String occ = l.get(1);

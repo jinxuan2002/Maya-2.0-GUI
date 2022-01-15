@@ -65,18 +65,6 @@ public class DBConnector {
         return null;
     }
 
-    public ResultSet StaffIDQuery(String ID){
-        try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM maya.staff where username = ?");
-            statement.setString(1, ID);
-            return statement.executeQuery();
-        } catch (SQLException | ClassNotFoundException e){
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -227,7 +215,7 @@ public class DBConnector {
         }
     }
 
-    public void DeleteModuelForID(String ID){
+    public void DeleteModuleForID(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             PreparedStatement delete = connection.prepareStatement("DELETE FROM maya.registered WHERE studentid = ?");
