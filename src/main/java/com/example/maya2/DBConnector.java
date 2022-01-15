@@ -99,7 +99,7 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ?");
+            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? order by Occurrence ASC");
             statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){
@@ -112,7 +112,7 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? AND `Occurrence` = ?", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement statement = connection.prepareStatement("select * from maya.moduledb where `Module` Like ? AND `Occurrence` = ? order by Occurrence ASC", ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
             statement.setString(1,"%" + search +"%");
             statement.setString(2, occ);
             rs = statement.executeQuery();
