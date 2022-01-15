@@ -66,7 +66,7 @@ public class StatsMenuController implements Initializable {
         series.getData().clear();
         barChart.getData().clear();
         try{
-            //series.setName(module);
+            series.setName(module);
             while(rs.next()){
                 String occ = rs.getString("Occurrence");
                 int actual = rs.getInt("Actual");
