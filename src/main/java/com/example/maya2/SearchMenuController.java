@@ -1,14 +1,13 @@
 package com.example.maya2;
 
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.*;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
@@ -46,12 +45,12 @@ public class SearchMenuController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToMaya(ID, session);
     }
 
     @FXML
-    public void Search(ActionEvent actionEvent){
+    public void Search(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchQuery(SearchField.getText());
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();

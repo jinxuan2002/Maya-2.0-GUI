@@ -1,14 +1,15 @@
 package com.example.maya2;
 
-import javafx.collections.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.sql.ResultSet;
-import java.util.*;
+import java.util.ResourceBundle;
 
 public class RegisterMenuController implements Initializable {
     private MainApplication main;
@@ -32,12 +33,12 @@ public class RegisterMenuController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToLogin();
     }
 
     @FXML
-    public void SelectStudent(ActionEvent actionEvent){
+    public void SelectStudent(){
         Student.setSelected(true);
         Staff.setSelected(false);
         IDText.setText("ID:");
@@ -48,7 +49,7 @@ public class RegisterMenuController implements Initializable {
     }
 
     @FXML
-    public void SelectStaff(ActionEvent actionEvent){
+    public void SelectStaff(){
         Student.setSelected(false);
         Staff.setSelected(true);
         IDText.setText("Username:");
@@ -59,7 +60,7 @@ public class RegisterMenuController implements Initializable {
     }
 
     @FXML
-    public void Register(ActionEvent actionEvent) throws Exception {
+    public void Register() throws Exception {
         DBConnector dbConnector = new DBConnector();
         ResultSet studentIDList = dbConnector.FindStudent(ID.getText());
         ResultSet staffIDList = dbConnector.FindStaff(ID.getText());

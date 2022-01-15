@@ -3,7 +3,6 @@ package com.example.maya2;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -56,7 +55,7 @@ public class ViewStudentListController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToViewStaffModule(ID, "Staff");
     }
 

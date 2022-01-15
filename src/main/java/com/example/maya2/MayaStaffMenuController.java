@@ -1,26 +1,20 @@
 package com.example.maya2;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.text.*;
-import org.controlsfx.control.action.Action;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 
 public class MayaStaffMenuController extends MayaStudentMenuController {
     @FXML
-    public void GoToModify(ActionEvent actionEvent) throws Exception {
+    public void GoToModify() throws Exception {
         main.GoToModify(ID,session);
     }
 
     @FXML
-    public void GoToViewStaffModule(ActionEvent actionEvent) throws Exception {
+    public void GoToViewStaffModule() throws Exception {
         main.GoToViewStaffModule(ID, session);
     }
 
     @FXML
-    public void GoToStatsMenu(ActionEvent actionEvent) throws Exception{
+    public void GoToStatsMenu() throws Exception{
         main.GoToStatsMenu(ID);
     }
 }

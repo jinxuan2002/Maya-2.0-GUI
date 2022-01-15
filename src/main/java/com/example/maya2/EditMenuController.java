@@ -53,7 +53,7 @@ public class EditMenuController implements Initializable {
 
 
     @FXML
-    public void Update(ActionEvent actionEvent){
+    public void Update(){
         DBConnector dbConnector = new DBConnector();
         ErrorLabel.setText("");
         String start = StartText.getText();
@@ -72,7 +72,7 @@ public class EditMenuController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToModify(ID,  "Staff");
     }
 

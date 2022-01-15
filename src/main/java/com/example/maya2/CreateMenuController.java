@@ -4,7 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -76,7 +75,7 @@ public class CreateMenuController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToModify(ID, "Staff");
     }
 

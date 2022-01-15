@@ -1,12 +1,11 @@
 package com.example.maya2;
 
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class ModifyMenuController extends SearchMenuController {
     @FXML
-    public void GoToEdit(ActionEvent actionEvent) throws Exception {
+    public void GoToEdit() throws Exception {
         if (!SearchTable.getSelectionModel().isEmpty()) {
             ObservableList<String> list = SearchTable.getSelectionModel().getSelectedItem();
             main.GoToEdit(list, ID);
@@ -14,12 +13,12 @@ public class ModifyMenuController extends SearchMenuController {
     }
 
     @FXML
-    public void GoToCreate(ActionEvent actionEvent) throws Exception {
+    public void GoToCreate() throws Exception {
         main.GoToCreate(ID);
     }
 
     @FXML
-    public void Delete(ActionEvent actionEvent){
+    public void Delete(){
         if (!SearchTable.getSelectionModel().isEmpty()) {
             ObservableList<String> list = SearchTable.getSelectionModel().getSelectedItem();
             DBConnector dbConnector = new DBConnector();

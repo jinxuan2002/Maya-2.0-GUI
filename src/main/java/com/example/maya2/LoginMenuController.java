@@ -1,11 +1,15 @@
 package com.example.maya2;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.control.*;
-import java.sql.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginMenuController implements Initializable {
@@ -21,12 +25,12 @@ public class LoginMenuController implements Initializable {
     }
 
     @FXML
-    public void GoToRegister(ActionEvent event) throws Exception {
+    public void GoToRegister() throws Exception {
         main.GoToRegister();
     }
 
     @FXML
-    public void Login(ActionEvent event) throws Exception {
+    public void Login() throws Exception {
         try {
             DBConnector dbConnector = new DBConnector();
             ResultSet student = dbConnector.StudentLoginQuery(LoginID.getText(), LoginPassword.getText());

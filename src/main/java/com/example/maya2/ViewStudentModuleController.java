@@ -4,16 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
 
-import javax.xml.transform.Result;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ViewStudentModuleController extends SearchMenuController{
     public void initializeModule() {

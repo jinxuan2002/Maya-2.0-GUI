@@ -4,18 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.util.Callback;
-import org.controlsfx.control.action.Action;
 
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class ViewStaffModuleController extends SearchMenuController {
     public void InitializeModule(){
@@ -49,7 +43,7 @@ public class ViewStaffModuleController extends SearchMenuController {
     }
 
     @FXML
-    public void GoToViewStudentList(ActionEvent actionEvent) throws Exception {
+    public void GoToViewStudentList() throws Exception {
         if(!SearchTable.getSelectionModel().isEmpty()){
             ObservableList<String> selected = SearchTable.getSelectionModel().getSelectedItem();
             main.GoToViewStudentList(ID, selected);

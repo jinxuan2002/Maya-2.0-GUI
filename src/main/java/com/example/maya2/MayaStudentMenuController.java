@@ -1,8 +1,8 @@
 package com.example.maya2;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.*;
-import javafx.scene.text.*;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,7 +27,7 @@ public class MayaStudentMenuController implements Initializable {
     }
 
     @FXML
-    public void GoToSearch(ActionEvent actionEvent) throws Exception {
+    public void GoToSearch() throws Exception {
         main.GoToSearch(ID, session);
     }
 
@@ -47,7 +47,7 @@ public class MayaStudentMenuController implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToLogin();
     }
 

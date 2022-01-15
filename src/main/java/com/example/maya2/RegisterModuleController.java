@@ -39,12 +39,13 @@ public class RegisterModuleController implements Initializable {
         this.ID = ID;
     }
 
-    public void Back(ActionEvent actionEvent) throws Exception {
+    @FXML
+    public void Back() throws Exception {
         main.GoToMaya(ID, "Student");
     }
 
     @FXML
-    public void Search(ActionEvent actionEvent){
+    public void Search(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchDistinctModuleOcc(SearchField.getText());
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
@@ -166,7 +167,7 @@ public class RegisterModuleController implements Initializable {
     }
 
     @FXML
-    public void Save(ActionEvent event){
+    public void Save(){
         ObservableList<ObservableList<String>> list =  RegisteredTable.getItems();
         DBConnector dbConnector = new DBConnector();
         ResultSet registered = dbConnector.SearchRegistered(ID);

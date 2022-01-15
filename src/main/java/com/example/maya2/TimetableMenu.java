@@ -3,13 +3,11 @@ package com.example.maya2;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import javax.xml.transform.Result;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -95,7 +93,7 @@ public class TimetableMenu implements Initializable {
     }
 
     @FXML
-    public void Back(ActionEvent actionEvent) throws Exception {
+    public void Back() throws Exception {
         main.GoToMaya(ID, "Student");
     }
 
