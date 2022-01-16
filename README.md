@@ -14,6 +14,7 @@ Clone the project or download the .zip file of the branch.
 ## Running
 To run the project on Windows, open up a command prompt or powershell and run
 ```
+mvn dependency:resolve
 mvn clean javafx:run
 ```
 
