@@ -139,7 +139,7 @@ public class DBConnector {
         ResultSet rs = null;
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            PreparedStatement statement = connection.prepareStatement("select distinct Module,Occurrence from maya.moduledb where `Module` Like ?");
+            PreparedStatement statement = connection.prepareStatement("select distinct Module,Occurrence from maya.moduledb where `Module` Like ? order by Occurrence ASC");
             statement.setString(1,"%" + search +"%");
             rs = statement.executeQuery();
         } catch(SQLException | ClassNotFoundException e){

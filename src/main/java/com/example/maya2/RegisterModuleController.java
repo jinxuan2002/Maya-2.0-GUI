@@ -124,7 +124,7 @@ public class RegisterModuleController implements Initializable {
                 } else if(muet == 5 && !(studentMuet >= muet)){
                     ErrorLabel.setText("Your MUET band does not match with the requirements of the selected module.");
                     return;
-                } else if(studentMuet != muet && muet != 0){
+                } else if(studentMuet != muet && muet >= 1 && muet <= 4){
                     ErrorLabel.setText("Your MUET band does not match with the requirements of the selected module.");
                     return;
                 } else if(CalculateCredit(list) + credit > 22){
