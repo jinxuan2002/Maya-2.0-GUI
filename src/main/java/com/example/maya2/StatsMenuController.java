@@ -36,6 +36,7 @@ public class StatsMenuController implements Initializable {
         this.main = main;
     }
 
+    //Search the database for distinct module type and add them to the table
     public void Search(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchDistinctModule(SearchField.getText());
@@ -52,6 +53,7 @@ public class StatsMenuController implements Initializable {
         }
     }
 
+    //Display data on the bar chart based on the row selected in the table
     public void DisplayData(ObservableList<String> list){
         DBConnector dbConnector = new DBConnector();
         String module = list.get(0);
@@ -79,6 +81,7 @@ public class StatsMenuController implements Initializable {
         main.GoToMaya(ID, "Staff");
     }
 
+    //Initialize bar chart and table
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ModuleColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));

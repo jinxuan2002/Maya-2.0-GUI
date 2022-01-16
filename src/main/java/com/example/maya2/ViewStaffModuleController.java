@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ViewStaffModuleController extends SearchMenuController {
+
+    //Initialize the table with the module that matches the staff name
     public void InitializeModule(){
         DBConnector dbConnector = new DBConnector();
         ObservableList<ObservableList<String>> data = FXCollections.observableArrayList();
@@ -42,6 +44,7 @@ public class ViewStaffModuleController extends SearchMenuController {
         SearchTable.setItems(data);
     }
 
+    //Transfer the data from the selected row to the view student list menu
     @FXML
     public void GoToViewStudentList() throws Exception {
         if(!SearchTable.getSelectionModel().isEmpty()){

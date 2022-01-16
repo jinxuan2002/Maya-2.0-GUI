@@ -2,6 +2,7 @@ package com.example.maya2;
 
 import javafx.fxml.FXML;
 
+//Extends from maya student menu controller since they are the same anyway
 public class MayaStaffMenuController extends MayaStudentMenuController {
     @FXML
     public void GoToModify() throws Exception {

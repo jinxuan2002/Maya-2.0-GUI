@@ -35,6 +35,7 @@ public class TimetableMenu implements Initializable {
         this.ID = ID;
     }
 
+    //Initialize the timetable based on the registered module
     public void initializeTimetable(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchRegistered(ID);
@@ -97,6 +98,7 @@ public class TimetableMenu implements Initializable {
         main.GoToMaya(ID, "Student");
     }
 
+    //Initialize the timetable column
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         TimeColumn.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));

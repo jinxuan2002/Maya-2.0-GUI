@@ -49,6 +49,7 @@ public class SearchMenuController implements Initializable {
         main.GoToMaya(ID, session);
     }
 
+    //Search the database based on the search text field and add them to the table
     @FXML
     public void Search(){
         DBConnector dbConnector = new DBConnector();

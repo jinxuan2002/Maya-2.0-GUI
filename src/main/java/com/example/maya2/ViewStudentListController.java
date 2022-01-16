@@ -34,6 +34,7 @@ public class ViewStudentListController implements Initializable {
         this.list = list;
     }
 
+    //Initialize the student list table with data from the database based on the selected values from the previous page
     public void InitializeStudentList(){
         DBConnector dbConnector = new DBConnector();
         ObservableList<String> row = FXCollections.observableArrayList();
@@ -59,6 +60,7 @@ public class ViewStudentListController implements Initializable {
         main.GoToViewStaffModule(ID, "Staff");
     }
 
+    //Initialize the table column
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ColumnNo.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));

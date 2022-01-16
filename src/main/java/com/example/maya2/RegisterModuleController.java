@@ -43,6 +43,7 @@ public class RegisterModuleController implements Initializable {
         main.GoToMaya(ID, "Student");
     }
 
+    //Get the search text field, search the database and insert the results into the table
     @FXML
     public void Search(){
         DBConnector dbConnector = new DBConnector();
@@ -70,6 +71,7 @@ public class RegisterModuleController implements Initializable {
         SearchTable.setItems(data);
     }
 
+    //Add the selected row into the registered table on the right side
     @FXML
     public void Add(){
         if (!SearchTable.getSelectionModel().isEmpty()) {
@@ -143,6 +145,7 @@ public class RegisterModuleController implements Initializable {
         }
     }
 
+    //A method for calculating the credit based on the module registered table
     public int CalculateCredit(ObservableList<ObservableList<String>> list){
         DBConnector dbConnector = new DBConnector();
         int credit = 0;
@@ -165,6 +168,7 @@ public class RegisterModuleController implements Initializable {
         return credit;
     }
 
+    //Save all the registered module into the database
     @FXML
     public void Save(){
         ObservableList<ObservableList<String>> list =  RegisteredTable.getItems();
@@ -189,6 +193,7 @@ public class RegisterModuleController implements Initializable {
         }
     }
 
+    //Delete the module from the registered table
     @FXML
     public void Drop(){
         if (!RegisteredTable.getSelectionModel().isEmpty()) {
@@ -197,6 +202,7 @@ public class RegisterModuleController implements Initializable {
         }
     }
 
+    //Initialize the registered module table with all the currently registered module from the database
     public void InitializeDisplayTable(){
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchRegistered(ID);
@@ -213,6 +219,7 @@ public class RegisterModuleController implements Initializable {
         CreditLabel.setText("Credit: " + CalculateCredit(RegisteredTable.getItems()));
     }
 
+    //Initialize all the table and text box
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         RegisteredModule.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().get(0)));

@@ -38,6 +38,7 @@ public class CreateMenuController implements Initializable {
         this.ID = ID;
     }
 
+    //Create Module based on the text box values
     public void Create(){
        String module = String.format("%s - %s", ModuleCode.getText(), ModuleName.getText());
        String occ = OccText.getText();
@@ -79,6 +80,7 @@ public class CreateMenuController implements Initializable {
         main.GoToModify(ID, "Staff");
     }
 
+    //Set the initial text box and choice box values and only allow integers for specific text box
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday"

@@ -7,6 +7,7 @@ import java.sql.*;
 public class DBConnector {
     private Connection connection;
 
+    //Connect to local database
     public DBConnector(){
         try{
             this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","root","testing");
@@ -14,7 +15,8 @@ public class DBConnector {
             e.printStackTrace();
         }
     }
-    
+
+    //Search for student based on ID and password provided
     public ResultSet StudentLoginQuery(String ID, String password){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -28,6 +30,7 @@ public class DBConnector {
         return null;
     }
 
+    //Find student via ID
     public ResultSet FindStudent(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,6 +43,7 @@ public class DBConnector {
         return null;
     }
 
+    //Find Staff via ID
     public ResultSet FindStaff(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -52,6 +56,7 @@ public class DBConnector {
         return null;
     }
 
+    //Search for a staff based on ID and password provided
     public ResultSet StaffLoginQuery(String ID, String password){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -65,6 +70,7 @@ public class DBConnector {
         return null;
     }
 
+    //Insert the registered student info into the maya.student database
     public void StudentRegisterUpdate(String ID, String password, String email, String programme, int muet, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -81,6 +87,7 @@ public class DBConnector {
         }
     }
 
+    //Insert the registered staff info into the maya.staff database
     public void StaffRegisterUpdate(String username, String mail, String password, String fullName){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -95,6 +102,7 @@ public class DBConnector {
         }
     }
 
+    //Search the module database based on module name
     public ResultSet SearchQuery(String search){
         ResultSet rs = null;
         try{
@@ -108,6 +116,7 @@ public class DBConnector {
         return rs;
     }
 
+    //Search the module database based on module name and occurrence
     public ResultSet SearchQuery(String search, String occ){
         ResultSet rs = null;
         try{
@@ -122,6 +131,7 @@ public class DBConnector {
         return rs;
     }
 
+    //Search the module database based on lecturer
     public ResultSet SearchLecturer(String lecture){
         ResultSet rs = null;
         try{
@@ -135,6 +145,7 @@ public class DBConnector {
         return rs;
     }
 
+    //Search for distinct module based on module name and return column Module and Occurrence
     public ResultSet SearchDistinctModuleOcc(String search){
         ResultSet rs = null;
         try{
@@ -148,6 +159,7 @@ public class DBConnector {
         return rs;
     }
 
+    //Search for distinct module based on module name and return column Module
     public ResultSet SearchDistinctModule(String search){
         ResultSet rs = null;
         try{
@@ -161,6 +173,7 @@ public class DBConnector {
         return rs;
     }
 
+    //Edit the module based on the provided data
     public void EditQuery(ObservableList<String> list, String day, String start, String end, String Lecturer, int target){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -183,6 +196,7 @@ public class DBConnector {
         }
     }
 
+    //Insert a new module into the module database
     public void InsertQuery(String module, String occ, String mode, String day, String start, String end, String lecturer, int target){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -202,6 +216,7 @@ public class DBConnector {
         }
     }
 
+    //Delete a module from the module database
     public void DeleteQuery(String module, String occ, String mode){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -215,6 +230,7 @@ public class DBConnector {
         }
     }
 
+    //Delete(Unregister) the module for the student ID provided in the registered database
     public void DeleteModuleForID(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -226,6 +242,7 @@ public class DBConnector {
         }
     }
 
+    //Add(Register) a module for the  student ID provided in the registered database
     public void AddModuleForID(String ID, String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -239,6 +256,7 @@ public class DBConnector {
         }
     }
 
+    //Search the registered database based on the student ID provided
     public ResultSet SearchRegistered(String ID){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -251,6 +269,7 @@ public class DBConnector {
         return null;
     }
 
+    //Search the registered database based on the module name and occurrence provided
     public ResultSet SearchRegistered(String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -264,6 +283,8 @@ public class DBConnector {
         return null;
     }
 
+    //Increment the actual column value of the module in the module database by 1 where the module matches the provided module name and
+    //occurrence
     public void AddToActual(String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -276,6 +297,8 @@ public class DBConnector {
         }
     }
 
+    //Decrement the actual column value of the module in the module database by 1 where the module matches the provided module name and
+    //occurrence
     public void RemoveFromActual(String module, String occ){
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");

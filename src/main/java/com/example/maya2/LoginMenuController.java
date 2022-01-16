@@ -29,6 +29,7 @@ public class LoginMenuController implements Initializable {
         main.GoToRegister();
     }
 
+    //Login into the maya menu by checking for matching ID and password in the database
     @FXML
     public void Login() throws Exception {
         try {

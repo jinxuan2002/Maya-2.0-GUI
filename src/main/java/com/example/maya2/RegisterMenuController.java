@@ -37,6 +37,7 @@ public class RegisterMenuController implements Initializable {
         main.GoToLogin();
     }
 
+    //Run when the student button is clicked to set the value of certain text to match the requirements of the student
     @FXML
     public void SelectStudent(){
         Student.setSelected(true);
@@ -48,6 +49,7 @@ public class RegisterMenuController implements Initializable {
         muet.setDisable(false);
     }
 
+    //Run when the staff button is clicked to set the value of certain text to match the requirements of the staff
     @FXML
     public void SelectStaff(){
         Student.setSelected(false);
@@ -59,6 +61,8 @@ public class RegisterMenuController implements Initializable {
         muet.setDisable(true);
     }
 
+    //Check whether the values in each field match the requirements and display error message accordingly, else register successfully
+    //and go back to the login page
     @FXML
     public void Register() throws Exception {
         DBConnector dbConnector = new DBConnector();
@@ -100,6 +104,7 @@ public class RegisterMenuController implements Initializable {
         }
     }
 
+    //Initialize all the text box and choice box values
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Integer> muetList = FXCollections.observableArrayList(1,2,3,4,5,6);

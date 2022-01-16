@@ -17,6 +17,8 @@ public class ModifyMenuController extends SearchMenuController {
         main.GoToCreate(ID);
     }
 
+
+    //Delete the selected entry from the table and database
     @FXML
     public void Delete(){
         if (!SearchTable.getSelectionModel().isEmpty()) {

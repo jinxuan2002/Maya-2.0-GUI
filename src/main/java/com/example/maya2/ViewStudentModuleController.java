@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ViewStudentModuleController extends SearchMenuController{
+
+    //Initialize the student registered module table with the registered module database based on the student id
     public void initializeModule() {
         DBConnector dbConnector = new DBConnector();
         ResultSet rs = dbConnector.SearchRegistered(ID);

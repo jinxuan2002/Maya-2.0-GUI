@@ -51,7 +51,7 @@ public class EditMenuController implements Initializable {
     }
 
 
-
+    //update the selected module in the database based on the edit done
     @FXML
     public void Update(){
         DBConnector dbConnector = new DBConnector();
@@ -76,6 +76,7 @@ public class EditMenuController implements Initializable {
         main.GoToModify(ID,  "Staff");
     }
 
+    //Set the initial text box and choice box values and only allow integers for specific text box
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> day = FXCollections.observableArrayList("Monday", "Tuesday", "Wedenesday", "Thursday", "Friday", "Saturday", "Sunday", "N/A");

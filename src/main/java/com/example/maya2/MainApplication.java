@@ -127,6 +127,7 @@ public class MainApplication extends Application {
         stage.setHeight(700);
     }
 
+    //Load the scene from the fxml file and then return the controller class to be accessed
     private Initializable loadScene(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
         scene.setRoot(loader.load(MainApplication.class.getResourceAsStream(fxml)));
