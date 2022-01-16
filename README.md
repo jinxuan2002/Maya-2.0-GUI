@@ -2,26 +2,19 @@
 This project is created as a part of the assignment project under the UM WIX1002 Fundamentals of Programming class.
 
 ## Group Members
-Yau Wei Han U2102749
-Chung Qi Lin U2102742
-Lim Zheng Yu U2102809
-Cheong Jin Xuan U2102735
-Hoong Dao Jing U2102744
+Yau Wei Han U2102749  
+Chung Qi Lin U2102742  
+Lim Zheng Yu U2102809  
+Cheong Jin Xuan U2102735  
+Hoong Dao Jing U2102744  
 
 ## Getting Started
 Clone the project or download the .zip file of the branch.
 
-### Installing
-After cloning the project, you can do
-```
-mvn package
-```
-to install all the dependencies and build them into a JAR file.
-
 ## Running
 To run the project on Windows, open up a command prompt or powershell and run
 ```
-java -jar Maya-2.0-GUI.jar
+mvn clean javafx:run
 ```
 
 ## Built With
