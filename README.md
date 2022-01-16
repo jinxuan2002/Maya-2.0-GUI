@@ -11,10 +11,15 @@ Hoong Dao Jing U2102744
 ## Getting Started
 Clone the project or download the .zip file of the branch.
 
-## Running
-To run the project on Windows, open up a command prompt or powershell and run
+## Installing
+Install all the dependencies by doing
 ```
 mvn dependency:resolve
+```
+
+## Running
+To run this project, do
+```
 mvn clean javafx:run
 ```
 
