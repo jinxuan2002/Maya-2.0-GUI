@@ -11,7 +11,7 @@ Hoong Dao Jing U2102744
 ## Prerequisite
 - Maven
 - Java 17
-- MySQL server that hosts the maya database
+- MySQL server that hosts the maya database. You can get the database from here: [Maya Database](https://drive.google.com/file/d/1NJU9NijX_fX2PqSk5GEr0R0cEker9cnx/view?usp=sharing)
 
 ## Getting Started
 Clone the project or download the .zip file of the branch.  
