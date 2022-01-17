@@ -11,9 +11,14 @@ Hoong Dao Jing U2102744
 ## Prerequisite
 - Maven
 - Java 17
+- MySQL server that hosts the maya database
 
 ## Getting Started
-Clone the project or download the .zip file of the branch.
+Clone the project or download the .zip file of the branch.  
+Change the username and password on line 13 of the DBConnetor class to match the password of your MySQL server.
+```
+this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/maya","<your username here>","<your password here>");
+```
 
 ## Installing
 Install all the dependencies by doing
