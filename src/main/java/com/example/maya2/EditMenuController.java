@@ -64,8 +64,8 @@ public class EditMenuController implements Initializable {
             end = "N/A";
         }
         if(Integer.parseInt(start) < Integer.parseInt(end) && target > 0 && Integer.parseInt(start) <= 2400 && Integer.parseInt(end) <= 2400){
-            dbConnector.EditQuery(list, DayBox.getValue(), start,
-                    end, LecturerText.getText(), target);
+            dbConnector.EditQuery(list, DayBox.getValue(), start, end, LecturerText.getText(), target);
+            ErrorLabel.setText("Entry updated successfully!");
         } else{
             ErrorLabel.setText("Please enter a valid time in 24 hour format.");
         }
