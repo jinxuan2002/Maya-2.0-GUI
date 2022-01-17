@@ -8,6 +8,10 @@ Lim Zheng Yu U2102809
 Cheong Jin Xuan U2102735  
 Hoong Dao Jing U2102744  
 
+## Prerequisite
+- Maven
+- Java 17
+
 ## Getting Started
 Clone the project or download the .zip file of the branch.
 
