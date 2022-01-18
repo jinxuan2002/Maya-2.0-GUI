@@ -191,6 +191,7 @@ public class RegisterModuleController implements Initializable {
             dbConnector.AddModuleForID(ID, module, occ);
             dbConnector.AddToActual(module, occ);
         }
+        ErrorLabel.setText("Saved registered module successfully!");
     }
 
     //Delete the module from the registered table
