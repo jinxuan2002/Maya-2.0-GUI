@@ -62,6 +62,7 @@ public class StatsMenuController implements Initializable {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.getData().clear();
         barChart.getData().clear();
+        barChart.setBarGap(0.0);
         try{
             series.setName(module);
             while(rs.next()){
