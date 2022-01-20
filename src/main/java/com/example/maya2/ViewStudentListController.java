@@ -37,7 +37,7 @@ public class ViewStudentListController implements Initializable {
     //Initialize the student list table with data from the database based on the selected values from the previous page
     public void InitializeStudentList(){
         DBConnector dbConnector = new DBConnector();
-        ObservableList<String> row = FXCollections.observableArrayList();
+
         String module = list.get(0);
         String occ = list.get(1);
         ResultSet rs = dbConnector.SearchRegistered(module, occ);
@@ -47,6 +47,7 @@ public class ViewStudentListController implements Initializable {
                 ResultSet student = dbConnector.FindStudent(studentID);
                 student.next();
                 String fullName = student.getString("fullname");
+                ObservableList<String> row = FXCollections.observableArrayList();
                 row.addAll(Integer.toString(1), studentID, fullName);
                 StudentTable.getItems().add(row);
             }
